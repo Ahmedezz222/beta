@@ -1,128 +1,119 @@
 <!-- Hero Section -->
-<section class="hero-section">
+<section class="hero-section" aria-labelledby="hero-title">
   <div class="container">
     <div class="hero-content">
-      <h1>Discover Your Perfect Ride</h1>
-      <p class="hero-subtitle">From mountain trails to city streets, we have the perfect bike for every adventure. Quality bikes, expert service, and a welcoming community await you.</p>
+      <h1 id="hero-title">Welcome to Bike Store</h1>
+      <p class="hero-subtitle">Your One-Stop Shop for All Things Cycling - From Premium Bikes to Expert Service and a Cozy Cafe</p>
       <div class="hero-buttons">
-        <a href="/collections/all" class="btn btn-primary">Explore Bikes</a>
-        <a href="/pages/cafe-menu" class="btn btn-secondary">Visit Our Cafe</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number">500+</span>
-          <span class="stat-label">Happy Customers</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">50+</span>
-          <span class="stat-label">Bike Models</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">24/7</span>
-          <span class="stat-label">Expert Support</span>
-        </div>
+        <a href="/collections/all" class="btn btn-primary">Shop Now</a>
+        <a href="/pages/cafe-menu" class="btn btn-secondary">Cafe Menu</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- About Section -->
-<section class="about-section">
+<section class="about-section" aria-labelledby="about-title">
   <div class="container">
     <div class="about-content">
-      <h2>Why Choose Bike Store?</h2>
-      <p>We're more than just a bike shop. We're a community of cycling enthusiasts dedicated to helping you find the perfect ride and keeping it in top condition. With over 10 years of experience, we've helped thousands of riders discover their passion for cycling.</p>
+      <h2 id="about-title">About Bike Store</h2>
+      <p>At Bike Store, we are passionate about cycling and creating a community where riders of all levels can find quality bikes, expert service, and a welcoming space to connect. Our mission is to provide top-quality bikes, gear, and accessories while offering professional maintenance and repair services.</p>
       
       <div class="features-grid">
         <div class="feature-item">
-          <div class="feature-icon">🚴‍♂️</div>
-          <h3>Premium Selection</h3>
-          <p>Carefully curated collection of mountain, road, and city bikes from top brands</p>
+          <div class="feature-icon">🚴</div>
+          <h3>Quality Bikes</h3>
+          <p>Premium selection of mountain, road, and city bikes from trusted brands. Expert fitting and customization available.</p>
         </div>
         <div class="feature-item">
           <div class="feature-icon">🔧</div>
           <h3>Expert Service</h3>
-          <p>Professional maintenance and repair services by certified bike mechanics</p>
+          <p>Professional maintenance and repair services by certified mechanics. Quick turnaround and warranty on all work.</p>
         </div>
         <div class="feature-item">
           <div class="feature-icon">☕</div>
           <h3>Cafe & Community</h3>
-          <p>Relax in our cozy cafe while we service your bike and connect with fellow cyclists</p>
+          <p>Relax in our cozy cafe while we service your bike. Fresh coffee, healthy snacks, and a great place to meet fellow cyclists.</p>
         </div>
       </div>
       
       <div class="about-cta">
-        <a href="/pages/contact" class="btn btn-primary">Get Started Today</a>
+        <a href="/pages/contact" class="btn btn-primary">Contact Us</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Products Section -->
-<section class="products-section">
+<section class="products-section" aria-labelledby="products-title">
   <div class="container">
-    <h2>Featured Bikes</h2>
-    <p class="section-subtitle">Discover our most popular models, perfect for every type of rider</p>
+    <h2 id="products-title">Featured Products</h2>
     <div class="product-grid">
       {% for product in collections.frontpage.products limit:3 %}
-        <div class="product-card">
-          <a href="{{ product.url }}">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+        <article class="product-card">
+          <a href="{{ product.url }}" aria-label="View details for {{ product.title }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" loading="lazy">
             <h3>{{ product.title }}</h3>
             <p class="product-description">
               {% if product.title contains 'Mountain' %}
-                Perfect for off-road adventures and trail riding
+                Perfect for off-road adventures with durable construction and advanced suspension
               {% elsif product.title contains 'Road' %}
-                Built for speed and efficiency on paved roads
+                Built for speed and efficiency with lightweight frame and aerodynamic design
               {% else %}
-                Essential gear and accessories for every cyclist
+                Essential gear for every cyclist with premium materials and comfort features
               {% endif %}
             </p>
-            <span class="view-details">View Details →</span>
+            <span class="view-details">View Details</span>
           </a>
-        </div>
+        </article>
       {% endfor %}
     </div>
     <div class="products-cta">
-      <a href="/collections/all" class="btn btn-primary">View All Products</a>
+      <a href="/collections/all" class="btn btn-secondary">View All Products</a>
     </div>
   </div>
 </section>
 
 <!-- Testimonials Section -->
-<section class="testimonials-section">
+<section class="testimonials-section" aria-labelledby="testimonials-title">
   <div class="container">
-    <h2>What Our Customers Say</h2>
-    <p class="section-subtitle">Real stories from real cyclists who love our bikes and service</p>
+    <h2 id="testimonials-title">What Our Customers Say</h2>
     <div class="testimonials-grid">
-      <div class="testimonial-item">
-        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-        <p>"Bike Store has the best collection of bikes and accessories. The staff is incredibly knowledgeable and helped me find the perfect mountain bike for my needs!"</p>
-        <span class="customer-name">- Alex Johnson</span>
-      </div>
-      <div class="testimonial-item">
-        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-        <p>"I love my new road bike from Bike Store. The quality is outstanding and the customer service is top-notch. Highly recommend!"</p>
-        <span class="customer-name">- Maria Santos</span>
-      </div>
-      <div class="testimonial-item">
-        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-        <p>"Their bike repair service is fast, reliable, and affordable. They've kept my bike running smoothly for years!"</p>
-        <span class="customer-name">- James Thompson</span>
-      </div>
+      <blockquote class="testimonial-item">
+        <p>"Bike Store has the best collection of bikes and accessories. The staff is knowledgeable and the service is excellent. I love that I can grab a coffee while they work on my bike!"</p>
+        <cite class="customer-name">- Alex Johnson</cite>
+      </blockquote>
+      <blockquote class="testimonial-item">
+        <p>"I love my new mountain bike from Bike Store. The quality is outstanding and the customer service is top-notch. They really know their stuff and care about their customers."</p>
+        <cite class="customer-name">- Maria Santos</cite>
+      </blockquote>
+      <blockquote class="testimonial-item">
+        <p>"Their bike repair service is fast and reliable. The cafe is a great addition - I can enjoy a coffee while waiting for my bike to be ready. Highly recommend!"</p>
+        <cite class="customer-name">- James Thompson</cite>
+      </blockquote>
     </div>
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="cta-section">
+<!-- Services Section -->
+<section class="services-section" aria-labelledby="services-title">
   <div class="container">
-    <div class="cta-content">
-      <h2>Ready to Start Your Cycling Journey?</h2>
-      <p>Join our community of passionate cyclists and discover the perfect ride for your adventures.</p>
-      <div class="cta-buttons">
-        <a href="/collections/all" class="btn btn-primary">Shop Now</a>
-        <a href="/pages/contact" class="btn btn-secondary">Contact Us</a>
+    <h2 id="services-title">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3>Bike Sales</h3>
+        <p>Expert fitting and consultation to find the perfect bike for your needs and budget.</p>
+        <a href="/collections/all" class="service-link">Browse Bikes</a>
+      </div>
+      <div class="service-item">
+        <h3>Repair & Maintenance</h3>
+        <p>Professional service by certified mechanics with quick turnaround times.</p>
+        <a href="/pages/services" class="service-link">Book Service</a>
+      </div>
+      <div class="service-item">
+        <h3>Cafe & Community</h3>
+        <p>Fresh coffee, healthy snacks, and a welcoming space for cyclists to connect.</p>
+        <a href="/pages/cafe-menu" class="service-link">View Menu</a>
       </div>
     </div>
   </div>

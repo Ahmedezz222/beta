@@ -1,16 +1,53 @@
-<div class="product-detail container">
-  <div class="product-images">
-    <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
-  </div>
-  <div class="product-info">
-    <h1>{{ product.title }}</h1>
-    <p>{{ product.price | money }}</p>
-    <form action="/cart/add" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-      <button type="submit">Add to Cart</button>
-    </form>
-    <div class="product-description">
-      {{ product.description }}
+<main class="product-detail container" role="main">
+  <article class="product-content">
+    <div class="product-images">
+      <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}" loading="lazy">
+      {% if product.images.size > 1 %}
+        <div class="product-gallery">
+          {% for image in product.images limit:4 %}
+            <img src="{{ image | img_url: 'medium' }}" alt="{{ product.title }} - Image {{ forloop.index }}" loading="lazy">
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
-  </div>
-</div>
+    
+    <div class="product-info">
+      <header class="product-header">
+        <h1>{{ product.title }}</h1>
+        <div class="product-price">
+          <span class="price">{{ product.price | money }}</span>
+          {% if product.compare_at_price > product.price %}
+            <span class="compare-price">{{ product.compare_at_price | money }}</span>
+            <span class="discount-badge">Save {{ product.compare_at_price | minus: product.price | money }}</span>
+          {% endif %}
+        </div>
+      </header>
+      
+      <div class="product-description">
+        {{ product.description }}
+      </div>
+      
+      <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        <div class="quantity-selector">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" max="99">
+        </div>
+        <button type="submit" class="add-to-cart-btn">
+          <span class="btn-text">Add to Cart</span>
+          <span class="btn-icon">🛒</span>
+        </button>
+      </form>
+      
+      <div class="product-meta">
+        <div class="availability">
+          <span class="status available">In Stock</span>
+        </div>
+        <div class="shipping-info">
+          <p>Free shipping on orders over $50</p>
+          <p>30-day return policy</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
