@@ -1,1 +1,66 @@
-{% section 'featured-products' %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Welcome to Bike Store</h1>
+      <p class="hero-subtitle">Discover premium bicycles for every adventure</p>
+      <div class="hero-buttons">
+        <a href="/collections/all" class="btn btn-primary">Shop Now</a>
+        <a href="#featured" class="btn btn-secondary">View Featured</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Welcome Section -->
+<section class="welcome-section">
+  <div class="container">
+    <div class="welcome-content">
+      <h2>About Our Store</h2>
+      <p>We're passionate about cycling and committed to providing you with the highest quality bicycles. Whether you're a seasoned rider or just starting your cycling journey, we have the perfect bike for you.</p>
+      <div class="features-grid">
+        <div class="feature-item">
+          <h3>Quality Assurance</h3>
+          <p>Every bike is carefully inspected and tested before delivery</p>
+        </div>
+        <div class="feature-item">
+          <h3>Expert Support</h3>
+          <p>Our team of cycling experts is here to help you choose the right bike</p>
+        </div>
+        <div class="feature-item">
+          <h3>Wide Selection</h3>
+          <p>From mountain bikes to road bikes, we have something for everyone</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section id="featured" class="featured-products">
+  <div class="container">
+    <h2>Featured Bikes</h2>
+    <div class="product-grid">
+      {% for product in collections.frontpage.products limit:4 %}
+        <div class="product-card">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.price | money }}</p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Ready to Start Your Journey?</h2>
+      <p>Browse our complete collection and find your perfect ride today.</p>
+      <a href="/collections/all" class="btn btn-primary">Explore All Bikes</a>
+    </div>
+  </div>
+</section>

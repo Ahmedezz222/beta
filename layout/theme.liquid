@@ -3,13 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Premium bicycles for every adventure. Discover quality bikes at Bike Store.">
+    <meta name="keywords" content="bikes, bicycles, cycling, mountain bikes, road bikes">
+    <meta name="author" content="Bike Store">
     <title>{{ page_title }} - Bike Store</title>
     {{ content_for_header }}
     <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
     {% section 'header' %}
-    <main>
+    <main role="main">
       {{ content_for_layout }}
     </main>
     {% section 'footer' %}
