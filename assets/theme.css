@@ -1448,7 +1448,7 @@ main {
   
   /* Mobile menu improvements for smaller screens */
   .mobile-nav-link {
-    margin: 400;
+    margin: 100;
     font-size: 0.95rem;
     padding: 12px 14px;
   }
@@ -1456,7 +1456,7 @@ main {
   .mobile-nav-list {
     max-width: 260px;
     padding: 16px;
-    top: -5%;
+    top: 10%;
   }
   
   .mobile-menu-toggle {
