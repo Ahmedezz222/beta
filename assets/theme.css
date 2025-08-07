@@ -1448,6 +1448,7 @@ main {
   
   /* Mobile menu improvements for smaller screens */
   .mobile-nav-link {
+    margin: 100;
     font-size: 0.95rem;
     padding: 12px 14px;
   }
