@@ -1456,7 +1456,7 @@ main {
   .mobile-nav-list {
     max-width: 260px;
     padding: 16px;
-    top: 10%;
+    top: -5%;
   }
   
   .mobile-menu-toggle {
@@ -1471,7 +1471,7 @@ main {
   .mobile-close-btn {
     width: 30px;
     height: 30px;
-    top: 10px;
+    top: 0px;
     right: 10px;
   }
   
