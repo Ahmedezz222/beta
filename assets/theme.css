@@ -578,3 +578,110 @@ main {
     color: black !important;
   }
 }
+
+/* Artistic Headings */
+h1, h2, h3 {
+  font-family: 'Pacifico', cursive;
+  letter-spacing: 1.5px;
+}
+
+/* Artistic SVG backgrounds for hero and footer */
+.hero-section {
+  position: relative;
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  color: #fff;
+  padding: 100px 0 60px 0;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-section::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0; bottom: -1px; height: 80px;
+  background: url('data:image/svg+xml;utf8,<svg width="100%25" height="80" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h1440v40c-240 40-480 40-720 0S240 0 0 40V0z" fill="%23fafafa"/></svg>') no-repeat bottom center/cover;
+  z-index: 2;
+}
+
+.site-footer {
+  position: relative;
+  background: #2c2c2c;
+  color: #fff;
+  padding: 70px 0 40px 0;
+  margin-top: 60px;
+  border-top: 3px solid #4a90e2;
+  overflow: hidden;
+}
+.site-footer::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0; top: -1px; height: 80px;
+  background: url('data:image/svg+xml;utf8,<svg width="100%25" height="80" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 80h1440V40c-240-40-480-40-720 0S240 80 0 40v40z" fill="%23fafafa"/></svg>') no-repeat top center/cover;
+  z-index: 2;
+}
+
+/* Artistic section divider */
+.section-divider {
+  width: 100%;
+  height: 60px;
+  background: url('data:image/svg+xml;utf8,<svg width="100%25" height="60" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h1440v30c-240 30-480 30-720 0S240 0 0 30V0z" fill="%234a90e2"/></svg>') no-repeat center/cover;
+}
+
+/* Fade-in animation for sections */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: none; }
+}
+section, .page-content, .product-detail {
+  animation: fadeInUp 1s cubic-bezier(.23,1.01,.32,1) both;
+}
+
+/* Artistic button and card hover effects */
+.btn-primary, .btn-secondary {
+  box-shadow: 0 4px 20px rgba(74,144,226,0.15);
+  border-radius: 30px;
+  border-width: 2px;
+  letter-spacing: 1px;
+}
+.btn-primary:hover, .btn-secondary:hover {
+  box-shadow: 0 8px 32px rgba(74,144,226,0.25);
+  transform: scale(1.05) translateY(-2px);
+}
+.product-card {
+  transition: transform 0.4s cubic-bezier(.23,1.01,.32,1), box-shadow 0.4s cubic-bezier(.23,1.01,.32,1);
+  border: 2px solid #4a90e2;
+  background: linear-gradient(135deg, #fafafa 80%, #e3f0ff 100%);
+}
+.product-card:hover {
+  box-shadow: 0 12px 40px rgba(74,144,226,0.18);
+  border-color: #357abd;
+  background: linear-gradient(135deg, #e3f0ff 60%, #fafafa 100%);
+  transform: scale(1.03) translateY(-6px) rotate(-1deg);
+}
+
+/* Artistic accent for links */
+a {
+  transition: color 0.3s, text-shadow 0.3s;
+}
+a:hover {
+  color: #ff6f61;
+  text-shadow: 0 2px 8px #4a90e233;
+}
+
+/* Artistic color palette for feature items */
+.feature-item {
+  background: linear-gradient(120deg, #e3f0ff 60%, #fafafa 100%);
+  border: 2px solid #4a90e2;
+  box-shadow: 0 2px 12px rgba(74,144,226,0.08);
+}
+
+/* Artistic responsive tweaks */
+@media (max-width: 768px) {
+  .hero-section::after, .site-footer::before {
+    height: 40px;
+  }
+  .section-divider {
+    height: 30px;
+  }
+}
