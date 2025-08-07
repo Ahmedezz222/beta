@@ -179,11 +179,7 @@ body {
   transform: translateY(0);
 }
 
-.mobile-nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  text-align: center;
+.mobile-nav-content {
   width: 100%;
   max-width: 320px;
   background: rgba(255, 255, 255, 0.9);
@@ -195,13 +191,22 @@ body {
   top: 20%;
 }
 
+.mobile-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  text-align: left;
+  width: 100%;
+}
+
 .mobile-nav-item {
   margin: 0;
   padding: 0;
 }
 
 .mobile-nav-link {
-  display: block;
+  display: flex;
+  align-items: center;
   color: #2d3748;
   text-decoration: none;
   font-size: 1.1rem;
@@ -213,6 +218,79 @@ body {
   font-family: 'Inter', sans-serif;
   position: relative;
   background: transparent;
+  gap: 12px;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+}
+
+/* Mobile Search */
+.mobile-search {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(49, 130, 206, 0.2);
+}
+
+.mobile-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: #2d3748;
+  outline: none;
+}
+
+.mobile-search-input::placeholder {
+  color: #718096;
+}
+
+.mobile-search-btn {
+  background: #3182ce;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-search-btn:hover {
+  background: #2c5aa0;
+  transform: scale(1.05);
+}
+
+.search-icon {
+  font-size: 1rem;
+  color: white;
+}
+
+/* Mobile Nav Footer */
+.mobile-nav-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(49, 130, 206, 0.2);
+}
+
+.mobile-contact {
+  text-align: center;
+}
+
+.mobile-contact p {
+  margin: 8px 0;
+  color: #4a5568;
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
 }
 
 .mobile-nav-link:hover {
@@ -1453,10 +1531,18 @@ main {
     padding: 12px 14px;
   }
   
-  .mobile-nav-list {
+  .mobile-nav-content {
     max-width: 260px;
     padding: 16px;
     top: 15%;
+  }
+  
+  .mobile-nav-list {
+    margin: 16px 0;
+  }
+  
+  .mobile-search {
+    margin-bottom: 16px;
   }
   
   .mobile-menu-toggle {

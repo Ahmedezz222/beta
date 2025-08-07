@@ -43,26 +43,56 @@
           <button class="mobile-close-btn" aria-label="Close mobile menu">
             <span class="close-icon">×</span>
           </button>
-          <ul class="mobile-nav-list">
-            <li class="mobile-nav-item">
-              <a href="/" class="mobile-nav-link" aria-current="page">Home</a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="/collections/all" class="mobile-nav-link">Products</a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="/pages/cafe-menu" class="mobile-nav-link">Cafe Menu</a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="/cart" class="mobile-nav-link">
-                Cart
-                <span class="cart-count" aria-label="Items in cart">0</span>
-              </a>
-            </li>
-            <li class="mobile-nav-item">
-              <a href="/account" class="mobile-nav-link">Sign In</a>
-            </li>
-          </ul>
+          
+          <div class="mobile-nav-content">
+            <div class="mobile-search">
+              <input type="search" placeholder="Search products..." class="mobile-search-input">
+              <button class="mobile-search-btn" aria-label="Search">
+                <span class="search-icon">🔍</span>
+              </button>
+            </div>
+            
+            <ul class="mobile-nav-list">
+              <li class="mobile-nav-item">
+                <a href="/" class="mobile-nav-link" aria-current="page">
+                  <span class="nav-icon">🏠</span>
+                  Home
+                </a>
+              </li>
+              <li class="mobile-nav-item">
+                <a href="/collections/all" class="mobile-nav-link">
+                  <span class="nav-icon">🚴</span>
+                  Products
+                </a>
+              </li>
+              <li class="mobile-nav-item">
+                <a href="/pages/cafe-menu" class="mobile-nav-link">
+                  <span class="nav-icon">☕</span>
+                  Cafe Menu
+                </a>
+              </li>
+              <li class="mobile-nav-item">
+                <a href="/cart" class="mobile-nav-link">
+                  <span class="nav-icon">🛒</span>
+                  Cart
+                  <span class="cart-count" aria-label="Items in cart">0</span>
+                </a>
+              </li>
+              <li class="mobile-nav-item">
+                <a href="/account" class="mobile-nav-link">
+                  <span class="nav-icon">👤</span>
+                  Sign In
+                </a>
+              </li>
+            </ul>
+            
+            <div class="mobile-nav-footer">
+              <div class="mobile-contact">
+                <p>📞 +1 234 567 8900</p>
+                <p>📧 info@bikestore.com</p>
+              </div>
+            </div>
+          </div>
         </nav>
       </div>
     </div>
