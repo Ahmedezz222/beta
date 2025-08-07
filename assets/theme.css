@@ -4,13 +4,14 @@
 }
 
 body {
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   margin: 0;
   padding: 0;
   background: #ffffff;
   color: #333333;
   line-height: 1.6;
   font-size: 16px;
+  font-weight: 400;
 }
 
 /* Container and layout */
@@ -42,7 +43,8 @@ body {
   text-decoration: none;
   font-size: 1.8rem;
   font-weight: 700;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
 }
 
 .site-nav ul {
@@ -57,10 +59,11 @@ body {
 .site-nav a {
   color: #333333;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
   transition: color 0.3s ease;
   padding: 8px 12px;
+  font-family: 'Inter', sans-serif;
 }
 
 .site-nav a:hover {
@@ -81,16 +84,20 @@ main {
 }
 
 .hero-content h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   margin: 0 0 20px 0;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -1px;
+  line-height: 1.2;
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin: 0 0 40px 0;
   color: #666666;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
 }
 
 .hero-buttons {
@@ -103,13 +110,15 @@ main {
 /* Button styles */
 .btn {
   display: inline-block;
-  padding: 12px 24px;
+  padding: 14px 28px;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
   border: 1px solid transparent;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
 }
 
 .btn-primary {
@@ -119,6 +128,8 @@ main {
 
 .btn-primary:hover {
   background: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
 
 .btn-secondary {
@@ -128,6 +139,8 @@ main {
 
 .btn-secondary:hover {
   background: #545b62;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
 }
 
 /* About Section */
@@ -143,11 +156,13 @@ main {
 }
 
 .about-content h2 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin: 0 0 30px 0;
   color: #333333;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
 .about-content > p {
@@ -155,6 +170,8 @@ main {
   margin: 0 0 50px 0;
   color: #666666;
   line-height: 1.7;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 .features-grid {
@@ -168,23 +185,32 @@ main {
   text-align: center;
   padding: 30px 20px;
   background: #f8f9fa;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
 .feature-item h3 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 600;
   margin: 0 0 15px 0;
   color: #333333;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.3px;
 }
 
 .feature-item p {
   margin: 0;
   color: #666666;
-  line-height: 1.5;
-  font-size: 1rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 .about-cta {
@@ -199,11 +225,13 @@ main {
 
 .products-section h2 {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin: 0 0 50px 0;
   color: #333333;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
 .product-grid {
@@ -214,17 +242,18 @@ main {
 
 .product-card {
   background: #ffffff;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   padding: 0;
   text-align: center;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   overflow: hidden;
   border: 1px solid #e9ecef;
 }
 
 .product-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
 }
 
 .product-card a {
@@ -245,14 +274,17 @@ main {
   font-size: 1.3rem;
   font-weight: 600;
   color: #333333;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.2px;
 }
 
 .product-description {
   margin: 0 20px 20px 20px;
   color: #666666;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 .view-details {
@@ -261,8 +293,9 @@ main {
   font-weight: 600;
   margin: 0 20px 20px 20px;
   text-decoration: underline;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   transition: color 0.3s ease;
+  font-family: 'Inter', sans-serif;
 }
 
 .view-details:hover {
@@ -277,11 +310,13 @@ main {
 
 .testimonials-section h2 {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin: 0 0 50px 0;
   color: #333333;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
 .testimonials-grid {
@@ -293,9 +328,15 @@ main {
 .testimonial-item {
   background: #f8f9fa;
   padding: 30px 25px;
-  border-radius: 8px;
+  border-radius: 12px;
   text-align: center;
   border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.testimonial-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
 .testimonial-item p {
@@ -304,18 +345,21 @@ main {
   color: #333333;
   font-style: italic;
   line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 .customer-name {
   font-weight: 600;
   color: #007bff;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
 }
 
 /* Page Content Styles */
 .page-content {
   background: #fff;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin: 20px 0;
   overflow: hidden;
@@ -329,53 +373,63 @@ main {
 }
 
 .page-header h1 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin: 0;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
 .page-body {
   padding: 40px;
   line-height: 1.7;
+  font-family: 'Inter', sans-serif;
 }
 
 .page-body h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 600;
   margin: 30px 0 15px 0;
   color: #333333;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.3px;
 }
 
 .page-body h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
   margin: 25px 0 10px 0;
   color: #333333;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.2px;
 }
 
 .page-body p {
   margin: 0 0 15px 0;
   color: #333333;
   font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 .page-body ul, .page-body ol {
   margin: 0 0 15px 0;
   padding-left: 20px;
+  font-family: 'Inter', sans-serif;
 }
 
 .page-body li {
   margin-bottom: 5px;
   font-size: 1rem;
+  font-family: 'Inter', sans-serif;
 }
 
 .page-body a {
   color: #007bff;
   text-decoration: none;
   font-weight: 500;
+  font-family: 'Inter', sans-serif;
 }
 
 .page-body a:hover {
@@ -389,40 +443,46 @@ main {
   gap: 50px;
   background: #fff;
   padding: 50px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin: 40px 0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .product-images img {
   max-width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .product-info h1 {
   margin: 0 0 20px 0;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: #333333;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
 .product-info button {
   background: #007bff;
   color: #fff;
   border: none;
-  padding: 12px 30px;
-  border-radius: 4px;
+  padding: 14px 30px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   margin-top: 25px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
 }
 
 .product-info button:hover {
   background: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
 
 /* Enhanced Footer */
@@ -441,19 +501,21 @@ main {
 }
 
 .footer-section h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin: 0 0 15px 0;
   color: #ffffff;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.3px;
 }
 
 .footer-section h4 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin: 0 0 15px 0;
   color: #ffffff;
-  font-family: 'Georgia', serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.2px;
 }
 
 .footer-section p {
@@ -461,6 +523,8 @@ main {
   color: #cccccc;
   line-height: 1.5;
   font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 .footer-section ul {
@@ -478,6 +542,8 @@ main {
   text-decoration: none;
   transition: color 0.3s ease;
   font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 .footer-section ul li a:hover {
@@ -494,6 +560,8 @@ main {
   margin: 5px 0;
   color: #cccccc;
   font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 /* Responsive design */
@@ -509,7 +577,7 @@ main {
   }
   
   .hero-content h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   
   .hero-buttons {
@@ -520,7 +588,7 @@ main {
   .about-content h2,
   .products-section h2,
   .testimonials-section h2 {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
   
   .features-grid {
@@ -554,7 +622,7 @@ main {
   }
   
   .page-header h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
   
   .page-body {
