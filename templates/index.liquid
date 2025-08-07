@@ -44,6 +44,68 @@
   </div>
 </section>
 
+<!-- Ratings Section -->
+<section class="ratings-section" aria-labelledby="ratings-title">
+  <div class="container">
+    <h2 id="ratings-title">Our Ratings & Reviews</h2>
+    <div class="ratings-grid">
+      <div class="rating-card">
+        <div class="rating-header">
+          <h3>Bike Sales</h3>
+          <div class="star-rating">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+          <div class="rating-score">5.0</div>
+        </div>
+        <p class="rating-description">Excellent selection and expert fitting service</p>
+        <div class="rating-stats">
+          <span class="stat">Based on 127 reviews</span>
+        </div>
+      </div>
+      
+      <div class="rating-card">
+        <div class="rating-header">
+          <h3>Repair Service</h3>
+          <div class="star-rating">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+          <div class="rating-score">4.9</div>
+        </div>
+        <p class="rating-description">Fast, reliable, and professional service</p>
+        <div class="rating-stats">
+          <span class="stat">Based on 89 reviews</span>
+        </div>
+      </div>
+      
+      <div class="rating-card">
+        <div class="rating-header">
+          <h3>Cafe & Community</h3>
+          <div class="star-rating">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+          <div class="rating-score">4.8</div>
+        </div>
+        <p class="rating-description">Great coffee and welcoming atmosphere</p>
+        <div class="rating-stats">
+          <span class="stat">Based on 156 reviews</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Products Section -->
 <section class="products-section" aria-labelledby="products-title">
   <div class="container">
@@ -54,6 +116,16 @@
           <a href="{{ product.url }}" aria-label="View details for {{ product.title }}">
             <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" loading="lazy">
             <h3>{{ product.title }}</h3>
+            <div class="product-rating">
+              <div class="star-rating small">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <span class="rating-count">(24 reviews)</span>
+            </div>
             <p class="product-description">
               {% if product.title contains 'Mountain' %}
                 Perfect for off-road adventures with durable construction and advanced suspension
@@ -80,14 +152,41 @@
     <h2 id="testimonials-title">What Our Customers Say</h2>
     <div class="testimonials-grid">
       <blockquote class="testimonial-item">
+        <div class="testimonial-rating">
+          <div class="star-rating">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+        </div>
         <p>"Bike Store has the best collection of bikes and accessories. The staff is knowledgeable and the service is excellent. I love that I can grab a coffee while they work on my bike!"</p>
         <cite class="customer-name">- Alex Johnson</cite>
       </blockquote>
       <blockquote class="testimonial-item">
+        <div class="testimonial-rating">
+          <div class="star-rating">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+        </div>
         <p>"I love my new mountain bike from Bike Store. The quality is outstanding and the customer service is top-notch. They really know their stuff and care about their customers."</p>
         <cite class="customer-name">- Maria Santos</cite>
       </blockquote>
       <blockquote class="testimonial-item">
+        <div class="testimonial-rating">
+          <div class="star-rating">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+        </div>
         <p>"Their bike repair service is fast and reliable. The cafe is a great addition - I can enjoy a coffee while waiting for my bike to be ready. Highly recommend!"</p>
         <cite class="customer-name">- James Thompson</cite>
       </blockquote>
@@ -103,16 +202,46 @@
       <div class="service-item">
         <h3>Bike Sales</h3>
         <p>Expert fitting and consultation to find the perfect bike for your needs and budget.</p>
+        <div class="service-rating">
+          <div class="star-rating small">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+          <span class="rating-text">5.0 (127 reviews)</span>
+        </div>
         <a href="/collections/all" class="service-link">Browse Bikes</a>
       </div>
       <div class="service-item">
         <h3>Repair & Maintenance</h3>
         <p>Professional service by certified mechanics with quick turnaround times.</p>
+        <div class="service-rating">
+          <div class="star-rating small">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+          <span class="rating-text">4.9 (89 reviews)</span>
+        </div>
         <a href="/pages/services" class="service-link">Book Service</a>
       </div>
       <div class="service-item">
         <h3>Cafe & Community</h3>
         <p>Fresh coffee, healthy snacks, and a welcoming space for cyclists to connect.</p>
+        <div class="service-rating">
+          <div class="star-rating small">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+          <span class="rating-text">4.8 (156 reviews)</span>
+        </div>
         <a href="/pages/cafe-menu" class="service-link">View Menu</a>
       </div>
     </div>

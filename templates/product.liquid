@@ -14,6 +14,17 @@
     <div class="product-info">
       <header class="product-header">
         <h1>{{ product.title }}</h1>
+        <div class="product-rating-large">
+          <div class="star-rating">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+          <span class="rating-score-large">5.0</span>
+          <span class="rating-count-large">(24 reviews)</span>
+        </div>
         <div class="product-price">
           <span class="price">{{ product.price | money }}</span>
           {% if product.compare_at_price > product.price %}
@@ -50,4 +61,81 @@
       </div>
     </div>
   </article>
+  
+  <!-- Product Reviews Section -->
+  <section class="product-reviews" aria-labelledby="reviews-title">
+    <div class="reviews-header">
+      <h2 id="reviews-title">Customer Reviews</h2>
+      <div class="overall-rating">
+        <div class="rating-summary">
+          <div class="rating-score-large">4.8</div>
+          <div class="star-rating">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+          <div class="rating-stats-large">Based on 24 reviews</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="reviews-grid">
+      <div class="review-item">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <h4>Sarah M.</h4>
+            <div class="star-rating small">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="review-date">2 weeks ago</div>
+        </div>
+        <p class="review-text">"Excellent bike! Perfect for my daily commute. The quality is outstanding and the service was great."</p>
+      </div>
+      
+      <div class="review-item">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <h4>Mike R.</h4>
+            <div class="star-rating small">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="review-date">1 month ago</div>
+        </div>
+        <p class="review-text">"Great value for money. The bike handles well and the build quality is solid. Highly recommend!"</p>
+      </div>
+      
+      <div class="review-item">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <h4>Lisa K.</h4>
+            <div class="star-rating small">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="review-date">3 weeks ago</div>
+        </div>
+        <p class="review-text">"Perfect for weekend rides. Comfortable and reliable. The staff helped me choose the right size."</p>
+      </div>
+    </div>
+    
+    <div class="review-cta">
+      <button class="btn btn-primary">Write a Review</button>
+    </div>
+  </section>
 </main>
