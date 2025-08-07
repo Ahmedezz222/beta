@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Theme settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "store_name",
+        "label": "Store Name",
+        "default": "Bike Store"
+      },
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Primary Color",
+        "default": "#222222"
+      }
+    ]
+  },
+  {
+    "name": "Featured Products",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "featured_collection",
+        "label": "Featured Collection"
+      }
+    ]
+  }
+]
