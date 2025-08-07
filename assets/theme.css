@@ -1991,3 +1991,12 @@ html {
 .review-cta {
   text-align: center;
 }
+
+.site-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
