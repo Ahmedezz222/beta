@@ -3,50 +3,64 @@
   <div class="container">
     <div class="hero-content">
       <h1>Welcome to Bike Store</h1>
-      <p class="hero-subtitle">Discover premium bicycles for every adventure</p>
+      <p class="hero-subtitle">Your One-Stop Shop for All Things Cycling</p>
       <div class="hero-buttons">
         <a href="/collections/all" class="btn btn-primary">Shop Now</a>
-        <a href="#featured" class="btn btn-secondary">View Featured</a>
+        <a href="/pages/cafe-menu" class="btn btn-secondary">Cafe Menu</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Welcome Section -->
-<section class="welcome-section">
+<!-- About Section -->
+<section class="about-section">
   <div class="container">
-    <div class="welcome-content">
-      <h2>About Our Store</h2>
-      <p>We're passionate about cycling and committed to providing you with the highest quality bicycles. Whether you're a seasoned rider or just starting your cycling journey, we have the perfect bike for you.</p>
+    <div class="about-content">
+      <h2>About Bike Store</h2>
+      <p>At Bike Store, we are passionate about cycling. Our mission is to provide top-quality bikes, gear, and accessories to cyclists of all levels.</p>
+      
       <div class="features-grid">
         <div class="feature-item">
-          <h3>Quality Assurance</h3>
-          <p>Every bike is carefully inspected and tested before delivery</p>
+          <h3>Quality Bikes</h3>
+          <p>Premium selection of mountain, road, and city bikes</p>
         </div>
         <div class="feature-item">
-          <h3>Expert Support</h3>
-          <p>Our team of cycling experts is here to help you choose the right bike</p>
+          <h3>Expert Service</h3>
+          <p>Professional maintenance and repair services</p>
         </div>
         <div class="feature-item">
-          <h3>Wide Selection</h3>
-          <p>From mountain bikes to road bikes, we have something for everyone</p>
+          <h3>Cafe & Community</h3>
+          <p>Relax in our cafe while we service your bike</p>
         </div>
+      </div>
+      
+      <div class="about-cta">
+        <a href="/pages/contact" class="btn btn-primary">Contact Us</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Featured Products -->
-<section id="featured" class="featured-products">
+<!-- Products Section -->
+<section class="products-section">
   <div class="container">
-    <h2>Featured Bikes</h2>
+    <h2>Our Products</h2>
     <div class="product-grid">
-      {% for product in collections.frontpage.products limit:4 %}
+      {% for product in collections.frontpage.products limit:3 %}
         <div class="product-card">
           <a href="{{ product.url }}">
             <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
             <h3>{{ product.title }}</h3>
-            <p>{{ product.price | money }}</p>
+            <p class="product-description">
+              {% if product.title contains 'Mountain' %}
+                Perfect for off-road adventures
+              {% elsif product.title contains 'Road' %}
+                Built for speed and efficiency
+              {% else %}
+                Essential gear for every cyclist
+              {% endif %}
+            </p>
+            <span class="view-details">View Details</span>
           </a>
         </div>
       {% endfor %}
@@ -54,13 +68,23 @@
   </div>
 </section>
 
-<!-- Call to Action -->
-<section class="cta-section">
+<!-- Testimonials Section -->
+<section class="testimonials-section">
   <div class="container">
-    <div class="cta-content">
-      <h2>Ready to Start Your Journey?</h2>
-      <p>Browse our complete collection and find your perfect ride today.</p>
-      <a href="/collections/all" class="btn btn-primary">Explore All Bikes</a>
+    <h2>What Our Customers Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-item">
+        <p>"Bike Store has the best collection of bikes and accessories. Excellent service and great prices!"</p>
+        <span class="customer-name">- Alex J.</span>
+      </div>
+      <div class="testimonial-item">
+        <p>"I love my new mountain bike from Bike Store. The quality and customer service are top-notch!"</p>
+        <span class="customer-name">- Maria S.</span>
+      </div>
+      <div class="testimonial-item">
+        <p>"Their bike repair service is fast and reliable. Highly recommend!"</p>
+        <span class="customer-name">- James T.</span>
+      </div>
     </div>
   </div>
 </section>
