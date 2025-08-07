@@ -113,6 +113,172 @@ body {
   letter-spacing: -0.5px;
 }
 
+/* Mobile Navigation Styles */
+.mobile-nav-container {
+  display: none;
+  position: relative;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+  position: relative;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 3px;
+  background: #2d3748;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.mobile-nav-item {
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-link {
+  display: block;
+  color: #2d3748;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 20px 0;
+  border-bottom: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+.mobile-nav-link:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav-link:hover {
+  color: #3182ce;
+  background: rgba(49, 130, 206, 0.1);
+}
+
+.mobile-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #3182ce;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.mobile-nav-link:hover::after {
+  width: 80%;
+}
+
+.mobile-nav-link[aria-current="page"] {
+  color: #3182ce;
+  font-weight: 700;
+}
+
+  .mobile-nav-link[aria-current="page"]::after {
+    width: 80%;
+  }
+  
+  /* Mobile menu overlay styles */
+  .mobile-nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(49, 130, 206, 0.1), rgba(102, 126, 234, 0.1));
+    z-index: -1;
+  }
+  
+  /* Mobile menu animation */
+  .mobile-nav-list {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.1s;
+  }
+  
+  .mobile-nav.active .mobile-nav-list {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  /* Mobile menu item animation */
+  .mobile-nav-item {
+    transform: translateX(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-nav.active .mobile-nav-item {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  .mobile-nav.active .mobile-nav-item:nth-child(1) { transition-delay: 0.1s; }
+  .mobile-nav.active .mobile-nav-item:nth-child(2) { transition-delay: 0.2s; }
+  .mobile-nav.active .mobile-nav-item:nth-child(3) { transition-delay: 0.3s; }
+  .mobile-nav.active .mobile-nav-item:nth-child(4) { transition-delay: 0.4s; }
+  .mobile-nav.active .mobile-nav-item:nth-child(5) { transition-delay: 0.5s; }
+
 .site-title a {
   color: #2d3748;
   text-decoration: none;
@@ -1087,13 +1253,28 @@ main {
 /* Responsive design */
 @media (max-width: 768px) {
   .site-header .container {
-    flex-direction: column;
-    gap: 24px;
+    flex-direction: row;
+    gap: 0;
   }
   
   .header-content {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
+    gap: 0;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .desktop-nav {
+    display: none;
+  }
+  
+  .mobile-nav-container {
+    display: block;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
   }
   
   .nav-list {
@@ -1220,6 +1401,25 @@ main {
   
   .product-reviews {
     padding: 24px 16px;
+  }
+  
+  /* Mobile menu improvements for smaller screens */
+  .mobile-nav-link {
+    font-size: 1.1rem;
+    padding: 16px 0;
+  }
+  
+  .mobile-nav-list {
+    max-width: 280px;
+  }
+  
+  .mobile-menu-toggle {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .hamburger-line {
+    height: 2px;
   }
   
   .ratings-section {
