@@ -166,6 +166,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -181,7 +182,7 @@ body {
 .mobile-nav-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   text-align: center;
   width: 100%;
   max-width: 320px;
@@ -190,6 +191,8 @@ body {
   padding: 24px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  top: -10%;
 }
 
 .mobile-nav-item {
@@ -259,7 +262,7 @@ body {
   
   /* Mobile menu animation */
 .mobile-nav-list {
-  transform: translateY(30px) scale(0.95);
+  transform: translateY(40px) scale(0.9);
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
 }
@@ -290,8 +293,8 @@ body {
 /* Mobile close button */
 .mobile-close-btn {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 12px;
+  right: 12px;
   width: 36px;
   height: 36px;
   background: rgba(255, 255, 255, 0.95);
@@ -1452,6 +1455,7 @@ main {
   .mobile-nav-list {
     max-width: 260px;
     padding: 16px;
+    top: -5%;
   }
   
   .mobile-menu-toggle {
