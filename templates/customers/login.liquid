@@ -1,25 +1,6 @@
     }
   });
 </script>
-  
-  // Test if we're on the correct login page
-  if (window.location.pathname.includes('/account/login')) {
-    console.log('✅ Correct login page URL detected');
-  } else {
-    console.log('⚠️ Unexpected URL for login page:', window.location.pathname);
-  }
-</script>
-
-<!-- Simple Test Page -->
-<div style="background: #f0f9ff; border: 2px solid #3b82f6; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
-  <h2 style="color: #1e40af; margin: 0 0 10px 0;">Sign-In Page Test</h2>
-  <p style="color: #374151; margin: 0 0 15px 0;">If you can see this, the sign-in page is loading correctly!</p>
-  <div style="background: #dbeafe; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px;">
-    URL: <span id="current-url">{{ request.path }}</span><br>
-    Template: customers/login.liquid<br>
-    Status: ✅ Loaded Successfully
-  </div>
-</div>
 
 <main class="login-page" role="main">
   <div class="container">
@@ -107,11 +88,6 @@
               </button>
             </div>
           </div>
-        </div>
-
-        <!-- Divider -->
-        <div class="form-divider">
-          <span>or</span>
         </div>
 
         <!-- Register Section -->
