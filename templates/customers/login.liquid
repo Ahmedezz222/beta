@@ -7,23 +7,29 @@
       </div>
 
       <div class="login-forms">
-        <div class="login-section">
+        <!-- Sign In Section -->
+        <div class="login-form-section">
           <h2>Sign In</h2>
           
           {% form 'customer_login' %}
             <div class="form-group">
-              <label for="customer_email">Email</label>
-              <input type="email" name="customer[email]" id="customer_email" required class="form-input">
+              <label for="customer_email" class="form-label">Email Address</label>
+              <input type="email" name="customer[email]" id="customer_email" required class="form-input" placeholder="Enter your email">
             </div>
             
             <div class="form-group">
-              <label for="customer_password">Password</label>
-              <input type="password" name="customer[password]" id="customer_password" required class="form-input">
+              <label for="customer_password" class="form-label">Password</label>
+              <div class="password-input-wrapper">
+                <input type="password" name="customer[password]" id="customer_password" required class="form-input" placeholder="Enter your password">
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                  <span class="toggle-icon">👁️</span>
+                </button>
+              </div>
             </div>
             
             <div class="form-options">
-              <label class="checkbox-label">
-                <input type="checkbox" name="customer[remember_me]">
+              <label class="form-checkbox">
+                <input type="checkbox" name="customer[remember_me]" id="remember_me">
                 <span class="checkmark"></span>
                 Remember me
               </label>
@@ -34,56 +40,69 @@
             {% if form.errors %}
               <div class="form-errors">
                 {% for field in form.errors %}
-                  <p>{{ field | capitalize }} {{ form.errors.messages[field] }}</p>
+                  <p class="error-message">{{ field | capitalize }} {{ form.errors.messages[field] }}</p>
                 {% endfor %}
               </div>
             {% endif %}
             
-            <button type="submit" class="btn btn-primary login-btn">
+            <button type="submit" class="submit-btn">
               <span class="btn-text">Sign In</span>
               <span class="btn-icon">→</span>
             </button>
           {% endform %}
         </div>
 
-        <div class="divider">
+        <!-- Divider -->
+        <div class="form-divider">
           <span>or</span>
         </div>
 
-        <div class="register-section">
+        <!-- Register Section -->
+        <div class="login-form-section">
           <h2>Create Account</h2>
-          <p>New to Bike Yard? Create an account to start shopping and track your orders.</p>
+          <p class="section-description">New to Bike Yard? Create an account to start shopping and track your orders.</p>
           
           {% form 'customer_register' %}
             <div class="form-row">
               <div class="form-group">
-                <label for="register_first_name">First Name</label>
-                <input type="text" name="customer[first_name]" id="register_first_name" required class="form-input">
+                <label for="register_first_name" class="form-label">First Name</label>
+                <input type="text" name="customer[first_name]" id="register_first_name" required class="form-input" placeholder="Enter your first name">
               </div>
               
               <div class="form-group">
-                <label for="register_last_name">Last Name</label>
-                <input type="text" name="customer[last_name]" id="register_last_name" required class="form-input">
+                <label for="register_last_name" class="form-label">Last Name</label>
+                <input type="text" name="customer[last_name]" id="register_last_name" required class="form-input" placeholder="Enter your last name">
               </div>
             </div>
             
             <div class="form-group">
-              <label for="register_email">Email</label>
-              <input type="email" name="customer[email]" id="register_email" required class="form-input">
+              <label for="register_email" class="form-label">Email Address</label>
+              <input type="email" name="customer[email]" id="register_email" required class="form-input" placeholder="Enter your email">
             </div>
             
             <div class="form-group">
-              <label for="register_password">Password</label>
-              <input type="password" name="customer[password]" id="register_password" required class="form-input">
+              <label for="register_password" class="form-label">Password</label>
+              <div class="password-input-wrapper">
+                <input type="password" name="customer[password]" id="register_password" required class="form-input" placeholder="Create a password">
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                  <span class="toggle-icon">👁️</span>
+                </button>
+              </div>
+              <small class="password-hint">Password must be at least 6 characters long</small>
             </div>
             
             <div class="form-group">
-              <label for="register_password_confirm">Confirm Password</label>
-              <input type="password" name="customer[password_confirmation]" id="register_password_confirm" required class="form-input">
+              <label for="register_password_confirm" class="form-label">Confirm Password</label>
+              <div class="password-input-wrapper">
+                <input type="password" name="customer[password_confirmation]" id="register_password_confirm" required class="form-input" placeholder="Confirm your password">
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                  <span class="toggle-icon">👁️</span>
+                </button>
+              </div>
             </div>
             
             <div class="form-group">
-              <label class="checkbox-label">
+              <label class="form-checkbox">
                 <input type="checkbox" name="customer[accepts_marketing]" id="accepts_marketing">
                 <span class="checkmark"></span>
                 Subscribe to our newsletter for updates and exclusive offers
@@ -93,12 +112,12 @@
             {% if form.errors %}
               <div class="form-errors">
                 {% for field in form.errors %}
-                  <p>{{ field | capitalize }} {{ form.errors.messages[field] }}</p>
+                  <p class="error-message">{{ field | capitalize }} {{ form.errors.messages[field] }}</p>
                 {% endfor %}
               </div>
             {% endif %}
             
-            <button type="submit" class="btn btn-secondary register-btn">
+            <button type="submit" class="submit-btn">
               <span class="btn-text">Create Account</span>
               <span class="btn-icon">👤</span>
             </button>
@@ -106,6 +125,7 @@
         </div>
       </div>
 
+      <!-- Benefits Section -->
       <div class="login-benefits">
         <h3>Why Create an Account?</h3>
         <div class="benefits-grid">
@@ -143,6 +163,7 @@
         </div>
       </div>
 
+      <!-- Guest Checkout Section -->
       <div class="guest-checkout">
         <h3>Continue as Guest</h3>
         <p>Don't want to create an account? You can still shop and checkout as a guest.</p>
@@ -166,19 +187,40 @@
       confirmInput.addEventListener('input', function() {
         if (this.value !== passwordInput.value) {
           this.setCustomValidity('Passwords do not match');
+          this.classList.add('error');
         } else {
           this.setCustomValidity('');
+          this.classList.remove('error');
         }
       });
       
       passwordInput.addEventListener('input', function() {
         if (confirmInput.value && this.value !== confirmInput.value) {
           confirmInput.setCustomValidity('Passwords do not match');
+          confirmInput.classList.add('error');
         } else {
           confirmInput.setCustomValidity('');
+          confirmInput.classList.remove('error');
         }
       });
     }
+    
+    // Password toggle functionality
+    const passwordToggles = document.querySelectorAll('.password-toggle');
+    passwordToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const input = this.parentNode.querySelector('input');
+        const icon = this.querySelector('.toggle-icon');
+        
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.textContent = '🙈';
+        } else {
+          input.type = 'password';
+          icon.textContent = '👁️';
+        }
+      });
+    });
     
     // Form validation
     const loginForm = document.querySelector('form[action*="login"]');
@@ -186,39 +228,39 @@
     
     if (loginForm) {
       loginForm.addEventListener('submit', function(e) {
-        const email = document.getElementById('customer_email').value;
+        const email = document.getElementById('customer_email').value.trim();
         const password = document.getElementById('customer_password').value;
         
         if (!email || !password) {
           e.preventDefault();
-          alert('Please fill in all required fields');
+          showError('Please fill in all required fields');
         }
       });
     }
     
     if (registerForm) {
       registerForm.addEventListener('submit', function(e) {
-        const firstName = document.getElementById('register_first_name').value;
-        const lastName = document.getElementById('register_last_name').value;
-        const email = document.getElementById('register_email').value;
+        const firstName = document.getElementById('register_first_name').value.trim();
+        const lastName = document.getElementById('register_last_name').value.trim();
+        const email = document.getElementById('register_email').value.trim();
         const password = document.getElementById('register_password').value;
         const confirmPassword = document.getElementById('register_password_confirm').value;
         
         if (!firstName || !lastName || !email || !password || !confirmPassword) {
           e.preventDefault();
-          alert('Please fill in all required fields');
+          showError('Please fill in all required fields');
           return;
         }
         
         if (password !== confirmPassword) {
           e.preventDefault();
-          alert('Passwords do not match');
+          showError('Passwords do not match');
           return;
         }
         
         if (password.length < 6) {
           e.preventDefault();
-          alert('Password must be at least 6 characters long');
+          showError('Password must be at least 6 characters long');
           return;
         }
       });
@@ -232,27 +274,39 @@
       }, 500);
     }
     
-    // Toggle password visibility (optional enhancement)
-    const passwordInputs = document.querySelectorAll('input[type="password"]');
-    passwordInputs.forEach(input => {
-      const toggleBtn = document.createElement('button');
-      toggleBtn.type = 'button';
-      toggleBtn.className = 'password-toggle';
-      toggleBtn.innerHTML = '👁️';
-      toggleBtn.setAttribute('aria-label', 'Toggle password visibility');
+    // Error display function
+    function showError(message) {
+      const existingError = document.querySelector('.form-error');
+      if (existingError) {
+        existingError.remove();
+      }
       
-      toggleBtn.addEventListener('click', function() {
-        if (input.type === 'password') {
-          input.type = 'text';
-          this.innerHTML = '🙈';
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'form-error';
+      errorDiv.innerHTML = `<p class="error-message">${message}</p>`;
+      
+      const form = document.querySelector('.login-form-section form');
+      if (form) {
+        form.insertBefore(errorDiv, form.querySelector('button'));
+      }
+    }
+    
+    // Real-time validation
+    const inputs = document.querySelectorAll('.form-input');
+    inputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        if (this.hasAttribute('required') && !this.value.trim()) {
+          this.classList.add('error');
         } else {
-          input.type = 'password';
-          this.innerHTML = '👁️';
+          this.classList.remove('error');
         }
       });
       
-      input.parentNode.style.position = 'relative';
-      input.parentNode.appendChild(toggleBtn);
+      input.addEventListener('input', function() {
+        if (this.classList.contains('error') && this.value.trim()) {
+          this.classList.remove('error');
+        }
+      });
     });
   });
 </script>

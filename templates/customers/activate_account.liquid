@@ -1,0 +1,180 @@
+<main class="login-page" role="main">
+  <div class="container">
+    <div class="login-content">
+      <div class="login-header">
+        <h1>Activate Account</h1>
+        <p>Set your password to activate your account</p>
+      </div>
+
+      <div class="login-forms">
+        <div class="login-form-section">
+          <h2>Account Activation</h2>
+          
+          {% form 'activate_customer_password' %}
+            <div class="form-group">
+              <label for="customer_password" class="form-label">Password</label>
+              <div class="password-input-wrapper">
+                <input type="password" name="customer[password]" id="customer_password" required class="form-input" placeholder="Create a new password">
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                  <span class="toggle-icon">👁️</span>
+                </button>
+              </div>
+              <small class="password-hint">Password must be at least 6 characters long</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="customer_password_confirmation" class="form-label">Confirm Password</label>
+              <div class="password-input-wrapper">
+                <input type="password" name="customer[password_confirmation]" id="customer_password_confirmation" required class="form-input" placeholder="Confirm your password">
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                  <span class="toggle-icon">👁️</span>
+                </button>
+              </div>
+            </div>
+            
+            {% if form.errors %}
+              <div class="form-errors">
+                {% for field in form.errors %}
+                  <p class="error-message">{{ field | capitalize }} {{ form.errors.messages[field] }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+            
+            <button type="submit" class="submit-btn">
+              <span class="btn-text">Activate Account</span>
+              <span class="btn-icon">✅</span>
+            </button>
+          {% endform %}
+        </div>
+      </div>
+
+      <div class="login-benefits">
+        <h3>Welcome to Bike Yard!</h3>
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <div class="benefit-icon">🚴</div>
+            <div class="benefit-content">
+              <h4>Start Shopping</h4>
+              <p>Browse our collection of bikes and accessories</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <div class="benefit-icon">📦</div>
+            <div class="benefit-content">
+              <h4>Track Orders</h4>
+              <p>Monitor your orders and delivery status</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <div class="benefit-icon">💳</div>
+            <div class="benefit-content">
+              <h4>Save Payment</h4>
+              <p>Store payment methods for quick checkout</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <div class="benefit-icon">🎁</div>
+            <div class="benefit-content">
+              <h4>Exclusive Offers</h4>
+              <p>Get access to member-only deals and promotions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Password confirmation validation
+    const passwordInput = document.getElementById('customer_password');
+    const confirmInput = document.getElementById('customer_password_confirmation');
+    
+    if (passwordInput && confirmInput) {
+      confirmInput.addEventListener('input', function() {
+        if (this.value !== passwordInput.value) {
+          this.setCustomValidity('Passwords do not match');
+          this.classList.add('error');
+        } else {
+          this.setCustomValidity('');
+          this.classList.remove('error');
+        }
+      });
+      
+      passwordInput.addEventListener('input', function() {
+        if (confirmInput.value && this.value !== confirmInput.value) {
+          confirmInput.setCustomValidity('Passwords do not match');
+          confirmInput.classList.add('error');
+        } else {
+          confirmInput.setCustomValidity('');
+          confirmInput.classList.remove('error');
+        }
+      });
+    }
+    
+    // Password toggle functionality
+    const passwordToggles = document.querySelectorAll('.password-toggle');
+    passwordToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const input = this.parentNode.querySelector('input');
+        const icon = this.querySelector('.toggle-icon');
+        
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.textContent = '🙈';
+        } else {
+          input.type = 'password';
+          icon.textContent = '👁️';
+        }
+      });
+    });
+    
+    // Form validation
+    const activateForm = document.querySelector('form[action*="activate"]');
+    if (activateForm) {
+      activateForm.addEventListener('submit', function(e) {
+        const password = document.getElementById('customer_password').value;
+        const confirmPassword = document.getElementById('customer_password_confirmation').value;
+        
+        if (!password || !confirmPassword) {
+          e.preventDefault();
+          showError('Please fill in all required fields');
+          return;
+        }
+        
+        if (password !== confirmPassword) {
+          e.preventDefault();
+          showError('Passwords do not match');
+          return;
+        }
+        
+        if (password.length < 6) {
+          e.preventDefault();
+          showError('Password must be at least 6 characters long');
+          return;
+        }
+      });
+    }
+    
+    // Error display function
+    function showError(message) {
+      const existingError = document.querySelector('.form-error');
+      if (existingError) {
+        existingError.remove();
+      }
+      
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'form-error';
+      errorDiv.innerHTML = `<p class="error-message">${message}</p>`;
+      
+      const form = document.querySelector('.login-form-section form');
+      if (form) {
+        form.insertBefore(errorDiv, form.querySelector('button'));
+      }
+    }
+  });
+</script>

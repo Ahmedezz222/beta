@@ -2692,6 +2692,185 @@
   line-height: 1.6;
 }
 
+/* ===== LOGIN PAGE ENHANCED STYLES ===== */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.password-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.password-hint {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 4px;
+  display: block;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.form-divider {
+  text-align: center;
+  margin: 32px 0;
+  position: relative;
+}
+
+.form-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.form-divider span {
+  background: white;
+  padding: 0 16px;
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.section-description {
+  color: #6b7280;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.back-to-login {
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.back-to-login:hover {
+  text-decoration: underline;
+}
+
+.form-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.error-message {
+  color: #dc2626;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.form-input.error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-input.error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Enhanced checkbox styling */
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #4a5568;
+  line-height: 1.4;
+}
+
+.form-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #3182ce;
+}
+
+.form-checkbox .checkmark {
+  display: none;
+}
+
+/* Responsive improvements for login page */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .form-options {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .forgot-password {
+    text-align: center;
+  }
+  
+  .password-input-wrapper .form-input {
+    padding-right: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-forms {
+    gap: 24px;
+  }
+  
+  .login-form-section {
+    padding: 24px 20px;
+  }
+  
+  .form-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   margin: 0;
