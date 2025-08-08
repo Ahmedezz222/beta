@@ -1,53 +1,9 @@
-<!-- Sign-In Page Test -->
-<script>
-  console.log('Sign-in page loaded successfully');
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('Sign-in page DOM ready');
-    
-    // Test if all elements are loading properly
-    const emailInput = document.getElementById('customer_email');
-    const passwordInput = document.getElementById('customer_password');
-    const signinBtn = document.querySelector('.signin-btn');
-    
-    if (emailInput) console.log('Email input found');
-    if (passwordInput) console.log('Password input found');
-    if (signinBtn) console.log('Sign-in button found');
-    
-    // Auto-focus email field for better UX
-    if (emailInput) {
-      setTimeout(() => {
-        emailInput.focus();
-        console.log('Email field focused');
-      }, 100);
     }
   });
 </script>
-
-<!-- Page Status Indicator -->
-<div id="page-status" style="display: none; position: fixed; top: 10px; right: 10px; background: #10b981; color: white; padding: 8px 12px; border-radius: 4px; z-index: 9999; font-size: 12px;">
-  Sign-in page loaded successfully
-</div>
-
-<script>
-  // Show page status
-  document.addEventListener('DOMContentLoaded', function() {
-    const statusDiv = document.getElementById('page-status');
-    if (statusDiv) {
-      statusDiv.style.display = 'block';
-      setTimeout(() => {
-        statusDiv.style.display = 'none';
-      }, 3000);
-    }
-  });
-</script>
-
-<!-- URL Test -->
-<script>
-  console.log('Current URL:', window.location.href);
-  console.log('Pathname:', window.location.pathname);
   
   // Test if we're on the correct login page
-  if (window.location.pathname === '/account/login' || window.location.pathname === '/account') {
+  if (window.location.pathname.includes('/account/login')) {
     console.log('✅ Correct login page URL detected');
   } else {
     console.log('⚠️ Unexpected URL for login page:', window.location.pathname);
@@ -85,7 +41,7 @@
             <p>Access your account to view orders and manage preferences</p>
           </div>
           
-          {% form 'customer_login' %}
+          {% form 'customer_login', return_to: '/account' %}
             <div class="form-group">
               <label for="customer_email" class="form-label">Email Address</label>
               <input type="email" name="customer[email]" id="customer_email" required class="form-input" placeholder="Enter your email address">
@@ -112,13 +68,20 @@
             </div>
             
             {% if form.errors %}
-              <div class="form-errors">
-                {% for field in form.errors %}
+              <div class="form-errors" role="alert">
+                {% if form.errors.messages['form'] %}
                   <p class="error-message">
                     <span class="error-icon">!</span>
-                    {{ field | capitalize }} {{ form.errors.messages[field] }}
+                    {{ form.errors.messages['form'] }}
                   </p>
-                {% endfor %}
+                {% else %}
+                  {% for field in form.errors %}
+                    <p class="error-message">
+                      <span class="error-icon">!</span>
+                      {{ field | capitalize }} {{ form.errors.messages[field] }}
+                    </p>
+                  {% endfor %}
+                {% endif %}
               </div>
             {% endif %}
             
