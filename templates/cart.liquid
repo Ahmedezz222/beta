@@ -1,0 +1,234 @@
+<main class="cart-page" role="main">
+  <div class="container">
+    <header class="cart-header">
+      <h1>Shopping Cart</h1>
+    </header>
+
+    {% if cart.item_count > 0 %}
+      <div class="cart-content">
+        <div class="cart-items">
+          <div class="cart-items-header">
+            <h2>Items ({{ cart.item_count }})</h2>
+          </div>
+          
+          <form action="/cart" method="post" id="cart-form">
+            <div class="cart-items-list">
+              {% for item in cart.items %}
+                <article class="cart-item" data-item-key="{{ item.key }}">
+                  <div class="item-image">
+                    <a href="{{ item.url }}">
+                      <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title }}" loading="lazy">
+                    </a>
+                  </div>
+                  
+                  <div class="item-details">
+                    <div class="item-info">
+                      <h3 class="item-title">
+                        <a href="{{ item.url }}">{{ item.product.title }}</a>
+                      </h3>
+                      
+                      {% if item.product.has_only_default_variant == false %}
+                        <div class="item-variant">
+                          {% for option in item.options_with_values %}
+                            <span class="variant-option">{{ option.name }}: {{ option.value }}</span>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                      
+                      <div class="item-price">
+                        <span class="price">{{ item.final_price | money }}</span>
+                        {% if item.original_price != item.final_price %}
+                          <span class="compare-price">{{ item.original_price | money }}</span>
+                        {% endif %}
+                      </div>
+                    </div>
+                    
+                    <div class="item-actions">
+                      <div class="quantity-controls">
+                        <button type="button" class="qty-btn minus" data-action="decrease" aria-label="Decrease quantity">-</button>
+                        <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" max="99" class="quantity-input" data-item-key="{{ item.key }}">
+                        <button type="button" class="qty-btn plus" data-action="increase" aria-label="Increase quantity">+</button>
+                      </div>
+                      
+                      <button type="button" class="remove-item-btn" data-item-key="{{ item.key }}" aria-label="Remove item">
+                        <span class="remove-icon">×</span>
+                        <span class="remove-text">Remove</span>
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              {% endfor %}
+            </div>
+            
+            <div class="cart-actions">
+              <button type="submit" name="update" class="btn btn-secondary">Update Cart</button>
+              <a href="/collections/all" class="btn btn-outline">Continue Shopping</a>
+            </div>
+          </form>
+        </div>
+        
+        <aside class="cart-summary">
+          <div class="summary-card">
+            <h3>Order Summary</h3>
+            
+            <div class="summary-items">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+              
+              {% if cart.total_discounts > 0 %}
+                <div class="summary-row discount">
+                  <span>Discounts</span>
+                  <span>-{{ cart.total_discounts | money }}</span>
+                </div>
+              {% endif %}
+              
+              <div class="summary-row shipping">
+                <span>Shipping</span>
+                <span>Calculated at checkout</span>
+              </div>
+              
+              <div class="summary-row total">
+                <span>Total</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+            </div>
+            
+            <div class="checkout-actions">
+              <button type="submit" form="cart-form" name="checkout" class="btn btn-primary checkout-btn">
+                <span class="btn-text">Proceed to Checkout</span>
+                <span class="btn-icon">→</span>
+              </button>
+              
+              <div class="payment-methods">
+                <div class="payment-icons">
+                  <span class="payment-icon">💳</span>
+                  <span class="payment-icon">🔒</span>
+                  <span class="payment-icon">📱</span>
+                </div>
+                <p class="secure-checkout">Secure checkout powered by Shopify</p>
+              </div>
+            </div>
+            
+            <div class="cart-benefits">
+              <div class="benefit-item">
+                <span class="benefit-icon">🚚</span>
+                <div class="benefit-text">
+                  <strong>Free Shipping</strong>
+                  <span>On orders over $50</span>
+                </div>
+              </div>
+              
+              <div class="benefit-item">
+                <span class="benefit-icon">↩️</span>
+                <div class="benefit-text">
+                  <strong>30-Day Returns</strong>
+                  <span>Easy returns & exchanges</span>
+                </div>
+              </div>
+              
+              <div class="benefit-item">
+                <span class="benefit-icon">🛡️</span>
+                <div class="benefit-text">
+                  <strong>Warranty</strong>
+                  <span>1-year manufacturer warranty</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    {% else %}
+      <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added any items to your cart yet. Start shopping to find great bikes and accessories!</p>
+        <div class="empty-cart-actions">
+          <a href="/collections/all" class="btn btn-primary">Start Shopping</a>
+          <a href="/pages/contact" class="btn btn-outline">Need Help?</a>
+        </div>
+        
+        <div class="featured-products">
+          <h3>You might also like</h3>
+          <div class="featured-grid">
+            <!-- Featured products would be populated here -->
+            <div class="featured-item">
+              <div class="featured-image">
+                <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Featured bike" loading="lazy">
+              </div>
+              <h4>Mountain Bike</h4>
+              <p class="featured-price">$599.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</main>
+
+<script>
+  // Cart page functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    // Quantity controls
+    const quantityButtons = document.querySelectorAll('.qty-btn');
+    quantityButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const action = this.dataset.action;
+        const input = this.parentNode.querySelector('.quantity-input');
+        let value = parseInt(input.value);
+        
+        if (action === 'increase') {
+          value = Math.min(value + 1, 99);
+        } else if (action === 'decrease') {
+          value = Math.max(value - 1, 0);
+        }
+        
+        input.value = value;
+        
+        // Auto-update cart if quantity is 0
+        if (value === 0) {
+          this.closest('.cart-item').querySelector('.remove-item-btn').click();
+        }
+      });
+    });
+    
+    // Remove item functionality
+    const removeButtons = document.querySelectorAll('.remove-item-btn');
+    removeButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const itemKey = this.dataset.itemKey;
+        const cartItem = this.closest('.cart-item');
+        
+        // Show confirmation
+        if (confirm('Are you sure you want to remove this item?')) {
+          // Remove from cart logic here
+          cartItem.style.opacity = '0.5';
+          setTimeout(() => {
+            cartItem.remove();
+            // Update cart totals
+            updateCartTotals();
+          }, 300);
+        }
+      });
+    });
+    
+    // Quantity input change
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+    quantityInputs.forEach(input => {
+      input.addEventListener('change', function() {
+        const value = parseInt(this.value);
+        if (value < 0) {
+          this.value = 0;
+        } else if (value > 99) {
+          this.value = 99;
+        }
+      });
+    });
+    
+    function updateCartTotals() {
+      // Update cart totals logic here
+      console.log('Updating cart totals...');
+    }
+  });
+</script>

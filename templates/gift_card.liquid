@@ -1,0 +1,308 @@
+<main class="gift-card-page" role="main">
+  <div class="container">
+    <header class="gift-card-header">
+      <h1>Gift Cards</h1>
+      <p>Give the gift of cycling with our Bike Yard gift cards</p>
+    </header>
+
+    <div class="gift-card-content">
+      <div class="gift-card-hero">
+        <div class="hero-content">
+          <h2>Perfect for Every Cyclist</h2>
+          <p>Whether they're a seasoned rider or just starting out, our gift cards are the perfect way to help someone discover their passion for cycling.</p>
+          
+          <div class="gift-card-benefits">
+            <div class="benefit-item">
+              <span class="benefit-icon">🎁</span>
+              <span>No expiration date</span>
+            </div>
+            <div class="benefit-item">
+              <span class="benefit-icon">💳</span>
+              <span>Use online or in-store</span>
+            </div>
+            <div class="benefit-item">
+              <span class="benefit-icon">🚚</span>
+              <span>Free shipping</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="gift-card-preview">
+          <div class="card-design">
+            <div class="card-front">
+              <div class="card-logo">
+                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+              </div>
+              <div class="card-amount">$100</div>
+              <div class="card-message">Happy Cycling!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gift-card-form-section">
+        <div class="form-container">
+          <h3>Purchase Gift Card</h3>
+          
+          <form action="/cart/add" method="post" class="gift-card-form">
+            <div class="form-group">
+              <label for="gift-card-amount">Amount</label>
+              <select name="id" id="gift-card-amount" required class="amount-select">
+                <option value="">Select amount</option>
+                <option value="gift-card-25">$25</option>
+                <option value="gift-card-50">$50</option>
+                <option value="gift-card-100" selected>$100</option>
+                <option value="gift-card-200">$200</option>
+                <option value="gift-card-500">$500</option>
+                <option value="gift-card-custom">Custom Amount</option>
+              </select>
+            </div>
+            
+            <div class="form-group custom-amount-group" style="display: none;">
+              <label for="custom-amount">Custom Amount</label>
+              <input type="number" id="custom-amount" name="custom_amount" min="10" max="1000" step="5" placeholder="Enter amount">
+            </div>
+            
+            <div class="form-group">
+              <label for="recipient-name">Recipient Name (Optional)</label>
+              <input type="text" id="recipient-name" name="recipient_name" placeholder="Who is this gift for?">
+            </div>
+            
+            <div class="form-group">
+              <label for="gift-message">Gift Message (Optional)</label>
+              <textarea id="gift-message" name="gift_message" rows="3" placeholder="Add a personal message..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="sender-name">From (Optional)</label>
+              <input type="text" id="sender-name" name="sender_name" placeholder="Your name">
+            </div>
+            
+            <div class="form-group">
+              <label for="delivery-email">Delivery Email</label>
+              <input type="email" id="delivery-email" name="delivery_email" placeholder="Email to send the gift card" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="send_to_me" id="send-to-me">
+                <span class="checkmark"></span>
+                Also send a copy to me
+              </label>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-text">Add to Cart</span>
+                <span class="btn-icon">🛒</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="gift-card-info">
+        <h3>How It Works</h3>
+        <div class="info-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Choose Amount</h4>
+              <p>Select from our preset amounts or enter a custom value</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Personalize</h4>
+              <p>Add a recipient name and personal message</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Purchase</h4>
+              <p>Complete your order and receive the gift card instantly</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Redeem</h4>
+              <p>Use the gift card code to shop online or in-store</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gift-card-faq">
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How do gift cards work?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Gift cards can be used to purchase any product in our store, both online and in-person. They never expire and can be combined with other payment methods.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>When will the gift card be delivered?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Digital gift cards are delivered instantly via email. Physical gift cards are shipped within 1-2 business days.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can I use a gift card with other discounts?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! Gift cards can be used with most promotions and discounts. They work just like cash in your account.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What if I lose my gift card?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Contact our customer service team with your order number and we can help you recover your gift card balance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gift-card-redeem">
+        <h3>Redeem Your Gift Card</h3>
+        <div class="redeem-form">
+          <form action="/cart" method="post" class="redeem-form">
+            <div class="form-group">
+              <label for="gift-card-code">Gift Card Code</label>
+              <input type="text" id="gift-card-code" name="gift_card_code" placeholder="Enter your gift card code" class="code-input">
+            </div>
+            
+            <button type="submit" class="btn btn-secondary">
+              <span class="btn-text">Apply to Cart</span>
+              <span class="btn-icon">💳</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Gift card page functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    // Amount selector functionality
+    const amountSelect = document.getElementById('gift-card-amount');
+    const customAmountGroup = document.querySelector('.custom-amount-group');
+    const customAmountInput = document.getElementById('custom-amount');
+    
+    if (amountSelect) {
+      amountSelect.addEventListener('change', function() {
+        if (this.value === 'gift-card-custom') {
+          customAmountGroup.style.display = 'block';
+          customAmountInput.focus();
+        } else {
+          customAmountGroup.style.display = 'none';
+          customAmountInput.value = '';
+        }
+      });
+    }
+    
+    // Custom amount validation
+    if (customAmountInput) {
+      customAmountInput.addEventListener('input', function() {
+        const value = parseInt(this.value);
+        if (value < 10) {
+          this.setCustomValidity('Minimum amount is $10');
+        } else if (value > 1000) {
+          this.setCustomValidity('Maximum amount is $1000');
+        } else {
+          this.setCustomValidity('');
+        }
+      });
+    }
+    
+    // FAQ accordion functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        const answer = this.nextElementSibling;
+        const icon = this.querySelector('.faq-icon');
+        
+        // Close all other FAQ items
+        faqQuestions.forEach(q => {
+          q.setAttribute('aria-expanded', 'false');
+          q.nextElementSibling.style.display = 'none';
+          q.querySelector('.faq-icon').textContent = '+';
+        });
+        
+        // Toggle current item
+        if (!isExpanded) {
+          this.setAttribute('aria-expanded', 'true');
+          answer.style.display = 'block';
+          icon.textContent = '−';
+        }
+      });
+    });
+    
+    // Gift card preview update
+    const amountOptions = document.querySelectorAll('#gift-card-amount option');
+    const cardAmount = document.querySelector('.card-amount');
+    
+    amountOptions.forEach(option => {
+      if (option.value && option.value !== 'gift-card-custom') {
+        const amount = option.textContent;
+        option.addEventListener('click', function() {
+          if (cardAmount) {
+            cardAmount.textContent = amount;
+          }
+        });
+      }
+    });
+    
+    // Form validation
+    const giftCardForm = document.querySelector('.gift-card-form');
+    if (giftCardForm) {
+      giftCardForm.addEventListener('submit', function(e) {
+        const amount = document.getElementById('gift-card-amount').value;
+        const email = document.getElementById('delivery-email').value;
+        
+        if (!amount) {
+          e.preventDefault();
+          alert('Please select a gift card amount');
+          return;
+        }
+        
+        if (!email) {
+          e.preventDefault();
+          alert('Please enter a delivery email');
+          return;
+        }
+        
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          e.preventDefault();
+          alert('Please enter a valid email address');
+          return;
+        }
+      });
+    }
+  });
+</script>

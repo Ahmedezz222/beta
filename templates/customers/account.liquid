@@ -1,0 +1,238 @@
+<main class="account-page" role="main">
+  <div class="container">
+    <header class="account-header">
+      <h1>My Account</h1>
+      <p>Welcome back, {{ customer.first_name }}!</p>
+    </header>
+
+    <div class="account-content">
+      <aside class="account-sidebar">
+        <nav class="account-nav" aria-label="Account navigation">
+          <ul class="nav-list">
+            <li class="nav-item active">
+              <a href="/account" class="nav-link">
+                <span class="nav-icon">🏠</span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/account/orders" class="nav-link">
+                <span class="nav-icon">📦</span>
+                <span>Order History</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/account/addresses" class="nav-link">
+                <span class="nav-icon">📍</span>
+                <span>Addresses</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/account/profile" class="nav-link">
+                <span class="nav-icon">👤</span>
+                <span>Profile</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/account/logout" class="nav-link">
+                <span class="nav-icon">🚪</span>
+                <span>Logout</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="account-main">
+        <div class="account-overview">
+          <div class="overview-cards">
+            <div class="overview-card">
+              <div class="card-icon">📦</div>
+              <div class="card-content">
+                <h3>{{ customer.orders_count }}</h3>
+                <p>Total Orders</p>
+              </div>
+            </div>
+            
+            <div class="overview-card">
+              <div class="card-icon">💰</div>
+              <div class="card-content">
+                <h3>{{ customer.total_spent | money }}</h3>
+                <p>Total Spent</p>
+              </div>
+            </div>
+            
+            <div class="overview-card">
+              <div class="card-icon">🎁</div>
+              <div class="card-content">
+                <h3>0</h3>
+                <p>Reward Points</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="recent-orders">
+          <div class="section-header">
+            <h2>Recent Orders</h2>
+            <a href="/account/orders" class="view-all-link">View All Orders</a>
+          </div>
+          
+          {% if customer.orders.size > 0 %}
+            <div class="orders-list">
+              {% for order in customer.orders limit:3 %}
+                <div class="order-item">
+                  <div class="order-header">
+                    <div class="order-info">
+                      <h3>Order #{{ order.name }}</h3>
+                      <p class="order-date">{{ order.created_at | date: '%B %d, %Y' }}</p>
+                    </div>
+                    <div class="order-status">
+                      <span class="status-badge {{ order.financial_status }}">
+                        {{ order.financial_status | capitalize }}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div class="order-details">
+                    <div class="order-total">
+                      <span class="label">Total:</span>
+                      <span class="amount">{{ order.total_price | money }}</span>
+                    </div>
+                    
+                    <div class="order-items">
+                      {% for line_item in order.line_items limit:2 %}
+                        <div class="order-item-preview">
+                          <img src="{{ line_item.image | img_url: 'small' }}" alt="{{ line_item.title }}" loading="lazy">
+                          <div class="item-info">
+                            <h4>{{ line_item.title }}</h4>
+                            <p>Qty: {{ line_item.quantity }}</p>
+                          </div>
+                        </div>
+                      {% endfor %}
+                      {% if order.line_items.size > 2 %}
+                        <p class="more-items">+{{ order.line_items.size | minus: 2 }} more items</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                  
+                  <div class="order-actions">
+                    <a href="{{ order.customer_url }}" class="btn btn-outline">View Details</a>
+                    {% if order.financial_status == 'paid' %}
+                      <a href="{{ order.customer_url }}" class="btn btn-primary">Track Order</a>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="empty-orders">
+              <div class="empty-icon">📦</div>
+              <h3>No orders yet</h3>
+              <p>Start shopping to see your order history here</p>
+              <a href="/collections/all" class="btn btn-primary">Start Shopping</a>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="account-details">
+          <div class="section-header">
+            <h2>Account Information</h2>
+            <a href="/account/profile" class="edit-link">Edit Profile</a>
+          </div>
+          
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Name</span>
+              <span class="detail-value">{{ customer.name }}</span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="detail-label">Email</span>
+              <span class="detail-value">{{ customer.email }}</span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="detail-label">Member Since</span>
+              <span class="detail-value">{{ customer.created_at | date: '%B %Y' }}</span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="detail-label">Default Address</span>
+              <span class="detail-value">
+                {% if customer.default_address %}
+                  {{ customer.default_address.address1 }}, {{ customer.default_address.city }}
+                {% else %}
+                  No address saved
+                {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <h2>Quick Actions</h2>
+          <div class="actions-grid">
+            <a href="/collections/all" class="action-card">
+              <div class="action-icon">🛒</div>
+              <h3>Shop Now</h3>
+              <p>Browse our latest products</p>
+            </a>
+            
+            <a href="/pages/contact" class="action-card">
+              <div class="action-icon">📞</div>
+              <h3>Get Help</h3>
+              <p>Contact customer service</p>
+            </a>
+            
+            <a href="/pages/shipping" class="action-card">
+              <div class="action-icon">🚚</div>
+              <h3>Shipping Info</h3>
+              <p>Track your orders</p>
+            </a>
+            
+            <a href="/pages/returns" class="action-card">
+              <div class="action-icon">↩️</div>
+              <h3>Returns</h3>
+              <p>Return policy & process</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Account page functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    // Navigation highlighting
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPath) {
+        link.closest('.nav-item').classList.add('active');
+      }
+    });
+    
+    // Order status color coding
+    const statusBadges = document.querySelectorAll('.status-badge');
+    statusBadges.forEach(badge => {
+      const status = badge.textContent.toLowerCase();
+      badge.classList.add(status);
+    });
+    
+    // Quick action cards hover effect
+    const actionCards = document.querySelectorAll('.action-card');
+    actionCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  });
+</script>

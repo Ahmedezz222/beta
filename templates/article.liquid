@@ -1,0 +1,304 @@
+<main class="article-page" role="main">
+  <div class="container">
+    <article class="article-content">
+      <header class="article-header">
+        <div class="article-meta">
+          <a href="{{ blog.url }}" class="back-to-blog">← Back to {{ blog.title }}</a>
+          <div class="article-tags">
+            {% for tag in article.tags %}
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="tag">{{ tag }}</a>
+            {% endfor %}
+          </div>
+        </div>
+        
+        <h1 class="article-title">{{ article.title }}</h1>
+        
+        <div class="article-info">
+          <div class="author-info">
+            {% if article.author %}
+              <span class="author">By {{ article.author }}</span>
+            {% endif %}
+            <span class="publish-date">{{ article.published_at | date: '%B %d, %Y' }}</span>
+          </div>
+          
+          <div class="article-stats">
+            <span class="reading-time">5 min read</span>
+            <span class="comments-count">
+              {% if article.comments_count > 0 %}
+                {{ article.comments_count }} comments
+              {% else %}
+                No comments yet
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </header>
+
+      {% if article.image %}
+        <div class="article-hero">
+          <img src="{{ article.image | img_url: 'large' }}" alt="{{ article.title }}" loading="lazy">
+        </div>
+      {% endif %}
+
+      <div class="article-body">
+        <div class="article-text">
+          {{ article.content }}
+        </div>
+        
+        <div class="article-actions">
+          <div class="share-buttons">
+            <h4>Share this article</h4>
+            <div class="share-links">
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ article.url | url_encode }}" target="_blank" class="share-link facebook" aria-label="Share on Facebook">
+                <span class="share-icon">📘</span>
+                <span>Facebook</span>
+              </a>
+              <a href="https://twitter.com/intent/tweet?url={{ article.url | url_encode }}&text={{ article.title | url_encode }}" target="_blank" class="share-link twitter" aria-label="Share on Twitter">
+                <span class="share-icon">🐦</span>
+                <span>Twitter</span>
+              </a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ article.url | url_encode }}" target="_blank" class="share-link linkedin" aria-label="Share on LinkedIn">
+                <span class="share-icon">💼</span>
+                <span>LinkedIn</span>
+              </a>
+              <a href="mailto:?subject={{ article.title | url_encode }}&body={{ article.url | url_encode }}" class="share-link email" aria-label="Share via Email">
+                <span class="share-icon">✉️</span>
+                <span>Email</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <aside class="article-sidebar">
+      <div class="sidebar-section">
+        <h3>About the Author</h3>
+        <div class="author-card">
+          {% if article.author %}
+            <div class="author-avatar">
+              <img src="{{ 'logo.png' | asset_url }}" alt="{{ article.author }}" loading="lazy">
+            </div>
+            <div class="author-info">
+              <h4>{{ article.author }}</h4>
+              <p>Cycling enthusiast and Bike Yard team member</p>
+            </div>
+          {% else %}
+            <div class="author-info">
+              <h4>Bike Yard Team</h4>
+              <p>Your trusted source for cycling knowledge</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Related Articles</h3>
+        <div class="related-articles">
+          {% for related_article in blog.articles limit:3 %}
+            {% if related_article.id != article.id %}
+              <div class="related-article">
+                {% if related_article.image %}
+                  <div class="related-image">
+                    <a href="{{ related_article.url }}">
+                      <img src="{{ related_article.image | img_url: 'small' }}" alt="{{ related_article.title }}" loading="lazy">
+                    </a>
+                  </div>
+                {% endif %}
+                <div class="related-content">
+                  <h4><a href="{{ related_article.url }}">{{ related_article.title }}</a></h4>
+                  <p class="related-date">{{ related_article.published_at | date: '%B %d, %Y' }}</p>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Newsletter</h3>
+        <p>Get cycling tips and exclusive offers delivered to your inbox.</p>
+        <form action="/contact" method="post" class="newsletter-form">
+          <div class="form-group">
+            <input type="email" name="contact[email]" placeholder="Enter your email" required class="newsletter-input">
+          </div>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </aside>
+  </div>
+
+  <div class="article-comments">
+    <div class="container">
+      <h3>Comments</h3>
+      
+      {% if article.comments_enabled %}
+        {% if article.comments.size > 0 %}
+          <div class="comments-list">
+            {% for comment in article.comments %}
+              <div class="comment-item">
+                <div class="comment-header">
+                  <div class="comment-author">
+                    <h4>{{ comment.author }}</h4>
+                    <span class="comment-date">{{ comment.created_at | date: '%B %d, %Y' }}</span>
+                  </div>
+                </div>
+                <div class="comment-content">
+                  {{ comment.content }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="comment-form">
+          <h4>Leave a Comment</h4>
+          {% form 'new_comment', article %}
+            <div class="form-row">
+              <div class="form-group">
+                <label for="comment_author">Name</label>
+                <input type="text" name="comment[author]" id="comment_author" required class="form-input">
+              </div>
+              
+              <div class="form-group">
+                <label for="comment_email">Email</label>
+                <input type="email" name="comment[email]" id="comment_email" required class="form-input">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="comment_content">Comment</label>
+              <textarea name="comment[content]" id="comment_content" rows="5" required class="form-input"></textarea>
+            </div>
+            
+            {% if form.errors %}
+              <div class="form-errors">
+                {% for field in form.errors %}
+                  <p>{{ field | capitalize }} {{ form.errors.messages[field] }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+            
+            <button type="submit" class="btn btn-primary">Post Comment</button>
+          {% endform %}
+        </div>
+      {% else %}
+        <div class="comments-disabled">
+          <p>Comments are disabled for this article.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="article-navigation">
+    <div class="container">
+      <div class="nav-links">
+        {% if article.previous %}
+          <a href="{{ article.previous.url }}" class="nav-link prev">
+            <span class="nav-arrow">←</span>
+            <div class="nav-content">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">{{ article.previous.title }}</span>
+            </div>
+          </a>
+        {% endif %}
+        
+        {% if article.next %}
+          <a href="{{ article.next.url }}" class="nav-link next">
+            <div class="nav-content">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">{{ article.next.title }}</span>
+            </div>
+            <span class="nav-arrow">→</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Article page functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    // Reading time calculation
+    const articleText = document.querySelector('.article-text');
+    if (articleText) {
+      const wordCount = articleText.textContent.split(' ').length;
+      const readingTime = Math.ceil(wordCount / 200); // Average reading speed
+      
+      const readingTimeElement = document.querySelector('.reading-time');
+      if (readingTimeElement) {
+        readingTimeElement.textContent = `${readingTime} min read`;
+      }
+    }
+    
+    // Share button functionality
+    const shareLinks = document.querySelectorAll('.share-link');
+    shareLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.classList.contains('email')) {
+          // Email sharing handled by mailto link
+          return;
+        }
+        
+        // Open share window
+        const url = this.getAttribute('href');
+        const width = 600;
+        const height = 400;
+        const left = (screen.width / 2) - (width / 2);
+        const top = (screen.height / 2) - (height / 2);
+        
+        window.open(url, 'share', `width=${width},height=${height},left=${left},top=${top}`);
+        e.preventDefault();
+      });
+    });
+    
+    // Comment form validation
+    const commentForm = document.querySelector('.comment-form form');
+    if (commentForm) {
+      commentForm.addEventListener('submit', function(e) {
+        const author = document.getElementById('comment_author').value;
+        const email = document.getElementById('comment_email').value;
+        const content = document.getElementById('comment_content').value;
+        
+        if (!author || !email || !content) {
+          e.preventDefault();
+          alert('Please fill in all required fields');
+          return;
+        }
+        
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          e.preventDefault();
+          alert('Please enter a valid email address');
+          return;
+        }
+      });
+    }
+    
+    // Newsletter form functionality
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function(e) {
+        const email = this.querySelector('input[type="email"]').value;
+        if (!email) {
+          e.preventDefault();
+          alert('Please enter your email address');
+        }
+      });
+    }
+    
+    // Smooth scrolling for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  });
+</script>

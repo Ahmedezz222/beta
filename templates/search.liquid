@@ -1,0 +1,309 @@
+<main class="search-page" role="main">
+  <div class="container">
+    <header class="search-header">
+      <h1>Search Results</h1>
+      <div class="search-form">
+        <form action="/search" method="get" role="search">
+          <div class="search-input-group">
+            <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search for bikes, parts, accessories..." class="search-input" aria-label="Search">
+            <button type="submit" class="search-btn" aria-label="Search">
+              <span class="search-icon">🔍</span>
+            </button>
+          </div>
+          
+          <div class="search-filters">
+            <label class="filter-label">
+              <input type="radio" name="type" value="product" {% if search.types contains 'product' %}checked{% endif %}>
+              <span>Products</span>
+            </label>
+            <label class="filter-label">
+              <input type="radio" name="type" value="article" {% if search.types contains 'article' %}checked{% endif %}>
+              <span>Articles</span>
+            </label>
+            <label class="filter-label">
+              <input type="radio" name="type" value="page" {% if search.types contains 'page' %}checked{% endif %}>
+              <span>Pages</span>
+            </label>
+          </div>
+        </form>
+      </div>
+    </header>
+
+    {% if search.performed %}
+      <div class="search-results">
+        <div class="search-stats">
+          <p>
+            {% if search.results_count == 0 %}
+              No results found for "{{ search.terms | escape }}"
+            {% elsif search.results_count == 1 %}
+              1 result found for "{{ search.terms | escape }}"
+            {% else %}
+              {{ search.results_count }} results found for "{{ search.terms | escape }}"
+            {% endif %}
+          </p>
+        </div>
+
+        {% if search.results_count > 0 %}
+          <div class="search-content">
+            <div class="search-filters-sidebar">
+              <div class="filter-section">
+                <h3>Filter Results</h3>
+                
+                {% if search.types contains 'product' %}
+                  <div class="filter-group">
+                    <h4>Product Type</h4>
+                    <div class="filter-options">
+                      <label class="filter-option">
+                        <input type="checkbox" name="product_type" value="bike">
+                        <span class="checkmark"></span>
+                        Bikes
+                      </label>
+                      <label class="filter-option">
+                        <input type="checkbox" name="product_type" value="accessory">
+                        <span class="checkmark"></span>
+                        Accessories
+                      </label>
+                      <label class="filter-option">
+                        <input type="checkbox" name="product_type" value="part">
+                        <span class="checkmark"></span>
+                        Parts
+                      </label>
+                    </div>
+                  </div>
+                {% endif %}
+                
+                <div class="filter-group">
+                  <h4>Price Range</h4>
+                  <div class="price-filter">
+                    <input type="range" id="search-price-min" min="0" max="1000" value="0" class="price-slider">
+                    <input type="range" id="search-price-max" min="0" max="1000" value="1000" class="price-slider">
+                    <div class="price-inputs">
+                      <input type="number" id="search-price-min-input" placeholder="Min" class="price-input">
+                      <span>-</span>
+                      <input type="number" id="search-price-max-input" placeholder="Max" class="price-input">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="search-results-list">
+              {% for item in search.results %}
+                <article class="search-result-item" data-item-type="{{ item.object_type }}">
+                  {% if item.object_type == 'product' %}
+                    <div class="result-image">
+                      <a href="{{ item.url }}">
+                        <img src="{{ item.featured_image | img_url: 'medium' }}" alt="{{ item.title }}" loading="lazy">
+                      </a>
+                    </div>
+                    
+                    <div class="result-content">
+                      <h3 class="result-title">
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                      </h3>
+                      
+                      <div class="result-meta">
+                        <span class="result-type product">Product</span>
+                        <div class="result-rating">
+                          <div class="star-rating">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                          </div>
+                          <span class="rating-count">(8 reviews)</span>
+                        </div>
+                      </div>
+                      
+                      <div class="result-price">
+                        <span class="price">{{ item.price | money }}</span>
+                        {% if item.compare_at_price > item.price %}
+                          <span class="compare-price">{{ item.compare_at_price | money }}</span>
+                        {% endif %}
+                      </div>
+                      
+                      <div class="result-excerpt">
+                        {{ item.description | strip_html | truncate: 150 }}
+                      </div>
+                      
+                      <div class="result-actions">
+                        <button class="quick-add-btn" data-product-id="{{ item.id }}">
+                          <span class="btn-text">Quick Add</span>
+                          <span class="btn-icon">+</span>
+                        </button>
+                        <a href="{{ item.url }}" class="btn btn-outline">View Details</a>
+                      </div>
+                    </div>
+                    
+                  {% elsif item.object_type == 'article' %}
+                    <div class="result-image">
+                      <a href="{{ item.url }}">
+                        {% if item.image %}
+                          <img src="{{ item.image | img_url: 'medium' }}" alt="{{ item.title }}" loading="lazy">
+                        {% else %}
+                          <div class="placeholder-image">📝</div>
+                        {% endif %}
+                      </a>
+                    </div>
+                    
+                    <div class="result-content">
+                      <h3 class="result-title">
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                      </h3>
+                      
+                      <div class="result-meta">
+                        <span class="result-type article">Article</span>
+                        <span class="result-date">{{ item.published_at | date: '%B %d, %Y' }}</span>
+                      </div>
+                      
+                      <div class="result-excerpt">
+                        {{ item.excerpt_or_content | strip_html | truncate: 200 }}
+                      </div>
+                      
+                      <div class="result-actions">
+                        <a href="{{ item.url }}" class="btn btn-primary">Read More</a>
+                      </div>
+                    </div>
+                    
+                  {% elsif item.object_type == 'page' %}
+                    <div class="result-image">
+                      <a href="{{ item.url }}">
+                        <div class="placeholder-image">📄</div>
+                      </a>
+                    </div>
+                    
+                    <div class="result-content">
+                      <h3 class="result-title">
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                      </h3>
+                      
+                      <div class="result-meta">
+                        <span class="result-type page">Page</span>
+                      </div>
+                      
+                      <div class="result-excerpt">
+                        {{ item.content | strip_html | truncate: 200 }}
+                      </div>
+                      
+                      <div class="result-actions">
+                        <a href="{{ item.url }}" class="btn btn-primary">View Page</a>
+                      </div>
+                    </div>
+                  {% endif %}
+                </article>
+              {% endfor %}
+            </div>
+          </div>
+          
+          {% if paginate.pages > 1 %}
+            <div class="search-pagination">
+              {% if paginate.previous %}
+                <a href="{{ paginate.previous.url }}" class="pagination-link prev" aria-label="Previous page">
+                  <span>← Previous</span>
+                </a>
+              {% endif %}
+              
+              <div class="pagination-numbers">
+                {% for part in paginate.parts %}
+                  {% if part.is_link %}
+                    <a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>
+                  {% else %}
+                    <span class="pagination-current">{{ part.title }}</span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}" class="pagination-link next" aria-label="Next page">
+                  <span>Next →</span>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+          
+        {% else %}
+          <div class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <h2>No results found</h2>
+            <p>We couldn't find any results for "{{ search.terms | escape }}". Try:</p>
+            <ul class="search-suggestions">
+              <li>Checking your spelling</li>
+              <li>Using different keywords</li>
+              <li>Using more general terms</li>
+              <li>Browsing our <a href="/collections/all">product catalog</a></li>
+            </ul>
+            
+            <div class="popular-searches">
+              <h3>Popular Searches</h3>
+              <div class="search-tags">
+                <a href="/search?q=mountain+bike" class="search-tag">Mountain Bike</a>
+                <a href="/search?q=road+bike" class="search-tag">Road Bike</a>
+                <a href="/search?q=helmet" class="search-tag">Helmet</a>
+                <a href="/search?q=accessories" class="search-tag">Accessories</a>
+                <a href="/search?q=repair" class="search-tag">Repair</a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</main>
+
+<script>
+  // Search page functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    // Search form enhancement
+    const searchForm = document.querySelector('.search-form form');
+    const searchInput = document.querySelector('.search-input');
+    
+    if (searchForm && searchInput) {
+      // Auto-submit on filter change
+      const filterInputs = searchForm.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+      filterInputs.forEach(input => {
+        input.addEventListener('change', function() {
+          searchForm.submit();
+        });
+      });
+      
+      // Search suggestions
+      searchInput.addEventListener('input', function() {
+        // Implement search suggestions here
+        console.log('Search input:', this.value);
+      });
+    }
+    
+    // Quick add functionality for products
+    const quickAddButtons = document.querySelectorAll('.quick-add-btn');
+    quickAddButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const productId = this.dataset.productId;
+        // Add to cart logic here
+        console.log('Adding product to cart:', productId);
+      });
+    });
+    
+    // Price filter functionality
+    const priceSliders = document.querySelectorAll('.price-slider');
+    const priceInputs = document.querySelectorAll('.price-input');
+    
+    priceSliders.forEach(slider => {
+      slider.addEventListener('input', function() {
+        const correspondingInput = document.getElementById(this.id.replace('slider', 'input'));
+        if (correspondingInput) {
+          correspondingInput.value = this.value;
+        }
+      });
+    });
+    
+    priceInputs.forEach(input => {
+      input.addEventListener('change', function() {
+        const correspondingSlider = document.getElementById(this.id.replace('input', 'slider'));
+        if (correspondingSlider) {
+          correspondingSlider.value = this.value;
+        }
+      });
+    });
+  });
+</script>
