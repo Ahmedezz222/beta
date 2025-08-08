@@ -3,6 +3,45 @@
   box-sizing: border-box;
 }
 
+/* ===== HEADER STYLES ===== */
+.site-nav .signin-link {
+  text-decoration: none;
+  color: #3182ce;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: 2px solid #3182ce;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-nav .signin-link:hover {
+  background: #3182ce;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.mobile-nav .signin-link {
+  background: #3182ce;
+  color: white;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav .signin-link:hover {
+  background: #2c5aa0;
+  transform: translateY(-1px);
+}
+
 /* ===== COLLECTION PAGE STYLES ===== */
 .collection-page {
   padding: 40px 0;
