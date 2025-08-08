@@ -2,6 +2,8 @@
   });
 </script>
 
+{% layout 'theme.login' %}
+
 <main class="login-page" role="main">
   <div class="container">
     <div class="login-content">
@@ -22,7 +24,7 @@
             <p>Access your account to view orders and manage preferences</p>
           </div>
           
-          {% form 'customer_login' %}
+          {% form 'customer_login', novalidate: 'novalidate' %}
             <div class="form-group">
               <label for="customer_email" class="form-label">Email Address</label>
               <input type="email" name="customer[email]" id="customer_email" required class="form-input" placeholder="Enter your email address">

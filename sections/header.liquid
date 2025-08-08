@@ -1,6 +1,10 @@
 <header class="site-header" role="banner">
   <div class="container">
-    <div class="header-content">
+    <div class="header-                <a href="{{ routes.account_login_url }}" class="mobile-nav-link signin-link">
+                  Sign In
+                </a>
+              {% endif %}
+            </li>nt">
       <h1 class="site-title">
         <a href="/" aria-label="Bike Store - Home">
           <img src="{{ 'logo.png' | asset_url }}" alt="Bike Store Logo" class="site-logo" />
@@ -40,7 +44,7 @@
                 </ul>
               </div>
             {% else %}
-              <a href="/customers/login" class="nav-link signin-link">
+              <a href="{{ routes.account_login_url }}" class="nav-link signin-link">
                 Sign In
               </a>
             {% endif %}
