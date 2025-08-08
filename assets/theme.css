@@ -3112,6 +3112,206 @@
   }
 }
 
+/* ===== ENHANCED HEADER SIGN-IN STYLES ===== */
+.signin-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #3182ce;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.signin-link:hover {
+  background: #2c5aa0;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.signin-icon {
+  font-size: 0.9rem;
+}
+
+.account-nav-item {
+  position: relative;
+}
+
+.account-dropdown {
+  position: relative;
+}
+
+.account-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #4a5568;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.account-toggle:hover {
+  background: rgba(49, 130, 206, 0.1);
+  color: #3182ce;
+}
+
+.account-icon {
+  font-size: 1rem;
+}
+
+.account-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+
+.account-toggle[aria-expanded="true"] .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.account-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+}
+
+.account-dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-link {
+  display: block;
+  padding: 12px 16px;
+  color: #4a5568;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.dropdown-link:hover {
+  background: #f8fafc;
+  color: #3182ce;
+}
+
+.dropdown-link:last-child {
+  border-top: 1px solid #e2e8f0;
+  color: #e53e3e;
+}
+
+.dropdown-link:last-child:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* Mobile account menu styles */
+.mobile-account-menu {
+  padding: 16px 0;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 16px;
+}
+
+.account-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.account-info .account-icon {
+  font-size: 1.2rem;
+}
+
+.account-info .account-name {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.mobile-account-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-account-links li {
+  margin-bottom: 4px;
+}
+
+.mobile-account-links .mobile-nav-link {
+  padding: 12px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.mobile-account-links .mobile-nav-link:hover {
+  background: #f8fafc;
+  color: #3182ce;
+}
+
+.mobile-account-links .mobile-nav-link:last-child {
+  color: #e53e3e;
+}
+
+.mobile-account-links .mobile-nav-link:last-child:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* Responsive styles for header */
+@media (max-width: 768px) {
+  .signin-link {
+    justify-content: center;
+    margin-top: 8px;
+  }
+  
+  .account-dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    margin-top: 12px;
+  }
+  
+  .account-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   margin: 0;
@@ -3539,195 +3739,6 @@ main {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.hero-account-info {
-  margin-top: 32px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero-account-info p {
-  margin: 0 0 8px 0;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.hero-account-info p:last-child {
-  margin-bottom: 0;
-}
-
-.account-link {
-  color: #3182ce;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  text-shadow: none;
-}
-
-.account-link:hover {
-  color: #2c5aa0;
-  text-decoration: underline;
-}
-
-.btn-outline {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-  transition: all 0.3s ease;
-}
-
-.btn-outline:hover {
-  background: white;
-  color: #2d3748;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* ===== ACCOUNT CTA SECTION STYLES ===== */
-.account-cta-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 80px 0;
-  color: white;
-}
-
-.account-cta-content {
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.account-cta-content h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 0 0 16px 0;
-  color: white;
-}
-
-.account-cta-content > p {
-  font-size: 1.2rem;
-  margin: 0 0 48px 0;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.6;
-}
-
-.account-benefits {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 32px;
-  margin-bottom: 48px;
-}
-
-.benefit-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 32px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.benefit-card:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-}
-
-.benefit-card .benefit-icon {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
-  display: block;
-}
-
-.benefit-card h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin: 0 0 12px 0;
-  color: white;
-}
-
-.benefit-card p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.5;
-  font-size: 0.95rem;
-}
-
-.account-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-}
-
-.account-actions .btn {
-  min-width: 160px;
-}
-
-.guest-note {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.95rem;
-}
-
-.guest-note a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.guest-note a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive styles for account CTA */
-@media (max-width: 768px) {
-  .account-cta-content h2 {
-    font-size: 2rem;
-  }
-  
-  .account-cta-content > p {
-    font-size: 1.1rem;
-  }
-  
-  .account-benefits {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  
-  .account-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .account-actions .btn {
-    width: 100%;
-    max-width: 280px;
-  }
-}
-
-@media (max-width: 480px) {
-  .account-cta-section {
-    padding: 60px 0;
-  }
-  
-  .account-cta-content h2 {
-    font-size: 1.8rem;
-  }
-  
-  .benefit-card {
-    padding: 24px 20px;
-  }
 }
 
 .hero-buttons {
