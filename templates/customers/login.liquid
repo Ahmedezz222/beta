@@ -1,3 +1,46 @@
+<!-- Sign-In Page Test -->
+<script>
+  console.log('Sign-in page loaded successfully');
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Sign-in page DOM ready');
+    
+    // Test if all elements are loading properly
+    const emailInput = document.getElementById('customer_email');
+    const passwordInput = document.getElementById('customer_password');
+    const signinBtn = document.querySelector('.signin-btn');
+    
+    if (emailInput) console.log('Email input found');
+    if (passwordInput) console.log('Password input found');
+    if (signinBtn) console.log('Sign-in button found');
+    
+    // Auto-focus email field for better UX
+    if (emailInput) {
+      setTimeout(() => {
+        emailInput.focus();
+        console.log('Email field focused');
+      }, 100);
+    }
+  });
+</script>
+
+<!-- Page Status Indicator -->
+<div id="page-status" style="display: none; position: fixed; top: 10px; right: 10px; background: #10b981; color: white; padding: 8px 12px; border-radius: 4px; z-index: 9999; font-size: 12px;">
+  Sign-in page loaded successfully
+</div>
+
+<script>
+  // Show page status
+  document.addEventListener('DOMContentLoaded', function() {
+    const statusDiv = document.getElementById('page-status');
+    if (statusDiv) {
+      statusDiv.style.display = 'block';
+      setTimeout(() => {
+        statusDiv.style.display = 'none';
+      }, 3000);
+    }
+  });
+</script>
+
 <main class="login-page" role="main">
   <div class="container">
     <div class="login-content">
@@ -234,6 +277,8 @@
 <script>
   // Enhanced login page functionality
   document.addEventListener('DOMContentLoaded', function() {
+    console.log('Sign-in page JavaScript loaded');
+    
     // Password confirmation validation
     const passwordInput = document.getElementById('register_password');
     const confirmInput = document.getElementById('register_password_confirm');
@@ -311,6 +356,7 @@
     const registerForm = document.querySelector('form[action*="register"]');
     
     if (loginForm) {
+      console.log('Login form found');
       loginForm.addEventListener('submit', function(e) {
         const email = document.getElementById('customer_email').value.trim();
         const password = document.getElementById('customer_password').value;
@@ -324,10 +370,12 @@
         // Show loading state
         const submitBtn = loginForm.querySelector('.submit-btn');
         submitBtn.classList.add('loading');
+        console.log('Login form submitted');
       });
     }
     
     if (registerForm) {
+      console.log('Register form found');
       registerForm.addEventListener('submit', function(e) {
         const firstName = document.getElementById('register_first_name').value.trim();
         const lastName = document.getElementById('register_last_name').value.trim();
@@ -363,6 +411,7 @@
         // Show loading state
         const submitBtn = registerForm.querySelector('.submit-btn');
         submitBtn.classList.add('loading');
+        console.log('Register form submitted');
       });
     }
     
@@ -371,6 +420,7 @@
     if (emailInput) {
       setTimeout(() => {
         emailInput.focus();
+        console.log('Email field focused');
       }, 500);
     }
     
@@ -432,5 +482,7 @@
         }
       });
     });
+    
+    console.log('Sign-in page fully loaded and functional');
   });
 </script>
