@@ -1,16 +1,196 @@
-<section class="featured-products">
+<section class="featured-products section" id="featured-products-{{ section.id }}">
   <div class="container">
-    <h2>Featured Bikes</h2>
-    <div class="product-grid">
-      {% for product in collections.frontpage.products limit:4 %}
-        <div class="product-card">
-          <a href="{{ product.url }}">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-            <h3>{{ product.title }}</h3>
-            <p>{{ product.price | money }}</p>
+    <div class="section-header text-center">
+      <h2>{{ section.settings.featured_title | escape }}</h2>
+      {% if section.settings.featured_subtitle != blank %}
+        <p>{{ section.settings.featured_subtitle | escape }}</p>
+      {% endif %}
+    </div>
+
+    {%- assign featured_collection = collections[section.settings.featured_collection] -%}
+    
+    {% if featured_collection != blank %}
+      <div class="product-grid">
+        {% for product in featured_collection.products limit: section.settings.products_to_show %}
+          <div class="product-card">
+            <div class="product-card__image">
+              <a href="{{ product.url | within: collection }}" class="product-card__link">
+                {% if product.featured_media != blank %}
+                  <img
+                    srcset="{%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                      {%- if product.featured_media.width >= 360 -%}{{ product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                      {%- if product.featured_media.width >= 533 -%}{{ product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                      {%- if product.featured_media.width >= 720 -%}{{ product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+                      {%- if product.featured_media.width >= 940 -%}{{ product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+                      {%- if product.featured_media.width >= 1066 -%}{{ product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}"
+                    src="{{ product.featured_media | image_url: width: 533 }}"
+                    sizes="(min-width: 1100px) 535px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                    alt="{{ product.featured_media.alt | escape }}"
+                    loading="lazy"
+                    width="{{ product.featured_media.width }}"
+                    height="{{ product.featured_media.height }}"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+                
+                {% if section.settings.show_secondary_image and product.media[1] != blank %}
+                  <img
+                    srcset="{%- if product.media[1].width >= 165 -%}{{ product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
+                      {%- if product.media[1].width >= 360 -%}{{ product.media[1] | image_url: width: 360 }} 360w,{%- endif -%}
+                      {%- if product.media[1].width >= 533 -%}{{ product.media[1] | image_url: width: 533 }} 533w,{%- endif -%}
+                      {%- if product.media[1].width >= 720 -%}{{ product.media[1] | image_url: width: 720 }} 720w,{%- endif -%}
+                      {%- if product.media[1].width >= 940 -%}{{ product.media[1] | image_url: width: 940 }} 940w,{%- endif -%}
+                      {%- if product.media[1].width >= 1066 -%}{{ product.media[1] | image_url: width: 1066 }} 1066w,{%- endif -%}"
+                    src="{{ product.media[1] | image_url: width: 533 }}"
+                    sizes="(min-width: 1100px) 535px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                    alt="{{ product.media[1].alt | escape }}"
+                    loading="lazy"
+                    width="{{ product.media[1].width }}"
+                    height="{{ product.media[1].height }}"
+                    class="hover-image"
+                  >
+                {% endif %}
+              </a>
+
+              {% if section.settings.show_quick_add %}
+                <div class="quick-add">
+                  {%- assign product_form_id = 'quick-add-' | append: product.id -%}
+                  {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                    <button
+                      class="quick-add__submit button"
+                      type="submit"
+                      name="add"
+                      {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                    >
+                      <span>
+                        {%- if product.selected_or_first_available_variant.available -%}
+                          {{ 'products.product.add_to_cart' | t }}
+                        {%- else -%}
+                          {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                      </span>
+                    </button>
+                  {%- endform -%}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="product-card__info">
+              <h3 class="product-card__title">
+                <a href="{{ product.url | within: collection }}">{{ product.title | escape }}</a>
+              </h3>
+
+              <div class="product-card__price">
+                {% render 'price', product: product, show_compare_at_price: true %}
+              </div>
+
+              {% if product.variants.size > 1 %}
+                <div class="product-card__variants">
+                  {{ product.variants.size }} {{ 'products.product.variants' | t }}
+                </div>
+              {% endif %}
+
+              {% if section.settings.show_rating and product.metafields.reviews.rating.value != blank %}
+                <div class="rating">
+                  {%- liquid
+                    assign rating_decimal = 0 
+                    assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1 
+                    if decimal >= 0.3 and decimal <= 0.7
+                      assign rating_decimal = 0.5
+                    elsif decimal > 0.7
+                      assign rating_decimal = 1
+                    endif 
+                  -%}
+                  <div class="rating-star">
+                    {% render 'rating', rating: product.metafields.reviews.rating.value, rating_decimal: rating_decimal %}
+                  </div>
+                  <p class="rating-text">
+                    {{ product.metafields.reviews.rating_count }} {{ "products.product.reviews" | t }}
+                  </p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.show_view_all and featured_collection.all_products_count > section.settings.products_to_show %}
+        <div class="center">
+          <a href="{{ featured_collection.url }}" class="button button--secondary">
+            {{ 'sections.featured_collection.view_all' | t }}
           </a>
         </div>
-      {% endfor %}
-    </div>
+      {% endif %}
+    {% else %}
+      <div class="collection-empty">
+        <p>{{ 'sections.featured_collection.empty' | t }}</p>
+      </div>
+    {% endif %}
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "featured_title",
+      "default": "Featured Products",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "featured_subtitle",
+      "default": "Check out our most popular items",
+      "label": "Subtitle"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 2,
+      "default": 4,
+      "label": "Number of products to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": true,
+      "label": "Show second image on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": true,
+      "label": "Show product rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "default": true,
+      "label": "Show quick add button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "Show 'View all' button"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

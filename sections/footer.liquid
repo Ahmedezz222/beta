@@ -1,49 +1,130 @@
 <footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-content">
-      <div class="footer-section">
-        <h3>About Bike Store</h3>
+      <div class="footer-section about-section">
+        <h3>About {{ shop.name }}</h3>
         <p>Your one-stop destination for quality bikes, accessories, and expert service. We're passionate about cycling and committed to providing the best experience for our customers.</p>
-        <div class="social-links">
-          <a href="#" aria-label="Follow us on Facebook" class="social-link">Facebook</a>
-          <a href="#" aria-label="Follow us on Instagram" class="social-link">Instagram</a>
-          <a href="#" aria-label="Follow us on Twitter" class="social-link">Twitter</a>
-        </div>
+        
+        {%- if settings.show_social_icons -%}
+          <div class="social-links">
+            {%- if settings.social_facebook_link != blank -%}
+              <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Follow us on Facebook" class="social-link">
+                <span class="icon">{% render 'icon-facebook' %}</span>
+              </a>
+            {%- endif -%}
+            
+            {%- if settings.social_instagram_link != blank -%}
+              <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Follow us on Instagram" class="social-link">
+                <span class="icon">{% render 'icon-instagram' %}</span>
+              </a>
+            {%- endif -%}
+            
+            {%- if settings.social_twitter_link != blank -%}
+              <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener" aria-label="Follow us on Twitter" class="social-link">
+                <span class="icon">{% render 'icon-twitter' %}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </div>
       
       <div class="footer-section">
         <h4>Quick Links</h4>
         <ul class="footer-links">
-          <li><a href="/" class="footer-link">Home</a></li>
-          <li><a href="/collections/all" class="footer-link">Products</a></li>
-          <li><a href="/pages/contact" class="footer-link">Contact us</a></li>
-          <li><a href="/pages/cafe-menu" class="footer-link">Cafe Menu</a></li>
-          <li><a href="/pages/about" class="footer-link">About Us</a></li>
-          <li><a href="/account/login" class="footer-link">Sign In</a></li>
+          <li><a href="{{ routes.root_url }}" class="footer-link">Home</a></li>
+          <li><a href="{{ routes.collections_url }}/all" class="footer-link">Products</a></li>
+          <li><a href="{{ routes.search_url }}" class="footer-link">Search</a></li>
+          {%- if shop.customer_accounts_enabled -%}
+            <li><a href="{{ routes.account_url }}" class="footer-link">My Account</a></li>
+          {%- endif -%}
+          <li><a href="{{ routes.cart_url }}" class="footer-link">Cart</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Customer Service</h4>
+        <ul class="footer-links">
+          <li><a href="{{ routes.contact_url }}" class="footer-link">Contact Us</a></li>
+          {%- if shop.shipping_policy.body != blank -%}
+            <li><a href="{{ routes.shipping_policy_url }}" class="footer-link">Shipping Information</a></li>
+          {%- endif -%}
+          {%- if shop.refund_policy.body != blank -%}
+            <li><a href="{{ routes.refund_policy_url }}" class="footer-link">Returns & Refunds</a></li>
+          {%- endif -%}
+          {%- if shop.privacy_policy.body != blank -%}
+            <li><a href="{{ routes.privacy_policy_url }}" class="footer-link">Privacy Policy</a></li>
+          {%- endif -%}
+          {%- if shop.terms_of_service.body != blank -%}
+            <li><a href="{{ routes.terms_of_service_url }}" class="footer-link">Terms of Service</a></li>
+          {%- endif -%}
         </ul>
       </div>
       
       <div class="footer-section">
         <h4>Contact Info</h4>
         <address class="contact-info">
-          <p>123 Bike Street, City, Country</p>
-          <p><a href="tel:+12345678900" class="contact-link">+1 234 567 8900</a></p>
-          <p><a href="mailto:info@bikestore.com" class="contact-link">info@bikestore.com</a></p>
+          <p>{{ shop.address.street }}</p>
+          {%- if shop.address.city and shop.address.country -%}
+            <p>{{ shop.address.city }}, {{ shop.address.country }}</p>
+          {%- endif -%}
+          {%- if shop.phone -%}
+            <p><a href="tel:{{ shop.phone }}" class="contact-link">{{ shop.phone }}</a></p>
+          {%- endif -%}
+          <p><a href="mailto:{{ shop.email }}" class="contact-link">{{ shop.email }}</a></p>
         </address>
-        <div class="business-hours">
-          <p><strong>Hours:</strong></p>
-          <p>Mon-Fri: 9AM-7PM</p>
-          <p>Sat-Sun: 10AM-6PM</p>
-        </div>
       </div>
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; 2025 Bike Store. All Rights Reserved.</p>
-      <p class="footer-legal">
-        <a href="/pages/privacy" class="footer-link">Privacy Policy</a> | 
-        <a href="/pages/terms" class="footer-link">Terms of Service</a>
+      {%- if settings.show_payment_icons -%}
+        <div class="payment-icons">
+          {%- for type in shop.enabled_payment_types -%}
+            <span class="payment-icon">
+              {{ type | payment_type_svg_tag: class: 'icon' }}
+            </span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      
+      <p class="copyright">
+        {{ settings.footer_copyright_text }}
       </p>
     </div>
   </div>
 </footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "footer_additional_content",
+      "label": "Additional Content",
+      "default": "Your one-stop destination for quality bikes, accessories, and expert service."
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter signup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals."
+    }
+  ]
+}
+{% endschema %}

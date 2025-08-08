@@ -1,17 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction }}">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="Premium bicycles for every adventure. Discover quality bikes at Bike Store.">
-    <meta name="keywords" content="bikes, bicycles, cycling, mountain bikes, road bikes">
-    <meta name="author" content="Bike Store">
-    <title>{{ page_title }} - Bike Store</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="theme-color" content="{{ settings.theme_color | default: '#3182ce' }}">
+    
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {%- if canonical_url != blank -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
+    
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {%- if settings.favicon != blank -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32 }}" type="image/png">
+    {%- endif -%}
+
     {{ content_for_header }}
-    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+
+    {%- # Theme stylesheets -%}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'featured-products.css' | asset_url | stylesheet_tag }}
+    
+    {%- # Google Fonts -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
+    {%- # Theme settings CSS variables -%}
+    <style>
+      :root {
+        --primary-color: {{ settings.primary_color | default: '#3182ce' }};
+        --primary-text-color: {{ settings.text_color | default: '#2d3748' }};
+        --primary-background: {{ settings.background_color | default: '#ffffff' }};
+        --header-height: {{ settings.header_height | default: '80px' }};
+      }
+    </style>
   </head>
   <body>
     {% section 'header' %}

@@ -1,28 +1,183 @@
 [
   {
-    "name": "Theme settings",
+    "name": "theme_info",
+    "theme_name": "Bike Store",
+    "theme_version": "1.0.0",
+    "theme_author": "Developer",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
     "settings": [
-      {
-        "type": "text",
-        "id": "store_name",
-        "label": "Store Name",
-        "default": "Bike Store"
-      },
       {
         "type": "color",
         "id": "primary_color",
         "label": "Primary Color",
-        "default": "#222222"
+        "default": "#3182ce"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#2d3748"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent Color",
+        "default": "#2c5aa0"
       }
     ]
   },
   {
-    "name": "Featured Products",
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "select",
+        "id": "type_header_font",
+        "label": "Heading Font",
+        "default": "poppins_n7",
+        "options": [
+          {
+            "value": "poppins_n7",
+            "label": "Poppins Bold"
+          },
+          {
+            "value": "inter_n7",
+            "label": "Inter Bold"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "type_body_font",
+        "label": "Body Font",
+        "default": "inter_n4",
+        "options": [
+          {
+            "value": "inter_n4",
+            "label": "Inter Regular"
+          },
+          {
+            "value": "poppins_n4",
+            "label": "Poppins Regular"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "body_font_size",
+        "label": "Body Font Size",
+        "min": 14,
+        "max": 18,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 50,
+        "max": 300,
+        "step": 10,
+        "default": 140,
+        "unit": "px",
+        "label": "Logo width"
+      },
+      {
+        "type": "range",
+        "id": "header_height",
+        "min": 60,
+        "max": 120,
+        "step": 5,
+        "default": 80,
+        "unit": "px",
+        "label": "Header Height"
+      }
+    ]
+  },
+  {
+    "name": "Featured Collections",
     "settings": [
       {
         "type": "collection",
         "id": "featured_collection",
         "label": "Featured Collection"
+      },
+      {
+        "type": "text",
+        "id": "featured_title",
+        "label": "Featured Section Title",
+        "default": "Featured Products"
+      },
+      {
+        "type": "text",
+        "id": "featured_subtitle",
+        "label": "Featured Section Subtitle",
+        "default": "Check out our most popular items"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "footer_copyright_text",
+        "label": "Copyright Text",
+        "default": "© 2025 Bike Store. All rights reserved."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social_icons",
+        "label": "Show social icons",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https://facebook.com/..."
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/..."
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter",
+        "info": "https://twitter.com/..."
       }
     ]
   }
