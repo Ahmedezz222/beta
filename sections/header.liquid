@@ -29,7 +29,6 @@
             {% if customer %}
               <div class="account-dropdown">
                 <button class="account-toggle" aria-label="Account menu" aria-expanded="false">
-                  <span class="account-icon">👤</span>
                   <span class="account-name">{{ customer.first_name | default: customer.email }}</span>
                   <span class="dropdown-arrow">▼</span>
                 </button>
@@ -42,7 +41,6 @@
               </div>
             {% else %}
               <a href="/account/login" class="nav-link signin-link">
-                <span class="signin-icon">🔑</span>
                 Sign In
               </a>
             {% endif %}
@@ -82,7 +80,6 @@
               {% if customer %}
                 <div class="mobile-account-menu">
                   <div class="account-info">
-                    <span class="account-icon">👤</span>
                     <span class="account-name">{{ customer.first_name | default: customer.email }}</span>
                   </div>
                   <ul class="mobile-account-links">
@@ -94,7 +91,6 @@
                 </div>
               {% else %}
                 <a href="/account/login" class="mobile-nav-link signin-link">
-                  <span class="signin-icon">🔑</span>
                   Sign In
                 </a>
               {% endif %}

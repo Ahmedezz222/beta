@@ -2,7 +2,6 @@
   <div class="container">
     <div class="error-content">
       <div class="error-header">
-        <div class="error-icon">🚴</div>
         <h1>Page Not Found</h1>
         <p class="error-message">Sorry, we couldn't find the page you're looking for. It might have been moved, deleted, or you entered the wrong URL.</p>
       </div>
@@ -21,7 +20,7 @@
           <div class="search-input-group">
             <input type="search" name="q" placeholder="Search for bikes, parts, accessories..." class="search-input" aria-label="Search">
             <button type="submit" class="search-btn" aria-label="Search">
-              <span class="search-icon">🔍</span>
+              <span class="search-icon">Search</span>
             </button>
           </div>
         </form>
@@ -31,37 +30,31 @@
         <h3>Popular Pages</h3>
         <div class="links-grid">
           <div class="link-card">
-            <div class="link-icon">🏠</div>
             <h4><a href="/">Home</a></h4>
             <p>Return to our homepage</p>
           </div>
           
           <div class="link-card">
-            <div class="link-icon">🚴</div>
             <h4><a href="/collections/all">All Products</a></h4>
             <p>Browse our complete catalog</p>
           </div>
           
           <div class="link-card">
-            <div class="link-icon">📞</div>
             <h4><a href="/pages/contact">Contact</a></h4>
             <p>Get in touch with us</p>
           </div>
           
           <div class="link-card">
-            <div class="link-icon">ℹ️</div>
             <h4><a href="/pages/about">About Us</a></h4>
             <p>Learn more about Bike Yard</p>
           </div>
           
           <div class="link-card">
-            <div class="link-icon">🔧</div>
             <h4><a href="/pages/services">Services</a></h4>
             <p>Repair and maintenance services</p>
           </div>
           
           <div class="link-card">
-            <div class="link-icon">📝</div>
             <h4><a href="/blogs/news">Blog</a></h4>
             <p>Read our latest articles</p>
           </div>
@@ -104,30 +97,21 @@
         <h3>Need Help?</h3>
         <div class="help-options">
           <div class="help-option">
-            <div class="help-icon">📞</div>
-            <div class="help-content">
-              <h4>Call Us</h4>
-              <p>Speak with our customer service team</p>
-              <a href="tel:+1234567890" class="help-link">(123) 456-7890</a>
-            </div>
+            <h4>Call Us</h4>
+            <p>Speak with our customer service team</p>
+            <a href="tel:+1234567890" class="help-link">+1 (234) 567-890</a>
           </div>
           
           <div class="help-option">
-            <div class="help-icon">✉️</div>
-            <div class="help-content">
-              <h4>Email Us</h4>
-              <p>Send us a message and we'll get back to you</p>
-              <a href="mailto:info@bikeyard.com" class="help-link">info@bikeyard.com</a>
-            </div>
+            <h4>Email Us</h4>
+            <p>Send us a message and we'll respond quickly</p>
+            <a href="mailto:help@bikeyard.com" class="help-link">help@bikeyard.com</a>
           </div>
           
           <div class="help-option">
-            <div class="help-icon">💬</div>
-            <div class="help-content">
-              <h4>Live Chat</h4>
-              <p>Chat with us in real-time</p>
-              <button class="help-link chat-btn">Start Chat</button>
-            </div>
+            <h4>Live Chat</h4>
+            <p>Chat with us in real-time</p>
+            <button class="help-link chat-btn">Start Chat</button>
           </div>
         </div>
       </div>
@@ -138,37 +122,43 @@
 <script>
   // 404 page functionality
   document.addEventListener('DOMContentLoaded', function() {
-    // Search form functionality
+    // Chat button functionality
+    const chatBtn = document.querySelector('.chat-btn');
+    if (chatBtn) {
+      chatBtn.addEventListener('click', function() {
+        // Placeholder for chat functionality
+        alert('Live chat would be integrated here');
+      });
+    }
+    
+    // Search form enhancement
     const searchForm = document.querySelector('.search-form');
     const searchInput = document.querySelector('.search-input');
     
     if (searchForm && searchInput) {
       searchForm.addEventListener('submit', function(e) {
-        if (!searchInput.value.trim()) {
+        const query = searchInput.value.trim();
+        if (!query) {
           e.preventDefault();
           searchInput.focus();
+          return;
         }
       });
+      
+      // Auto-focus search input
+      searchInput.focus();
     }
     
-    // Chat button functionality
-    const chatBtn = document.querySelector('.chat-btn');
-    if (chatBtn) {
-      chatBtn.addEventListener('click', function() {
-        // Implement live chat functionality
-        console.log('Opening live chat...');
-        alert('Live chat feature coming soon!');
+    // Smooth scrolling for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
       });
-    }
-    
-    // Track 404 errors for analytics
-    console.log('404 error occurred on:', window.location.href);
-    
-    // Auto-focus search input
-    if (searchInput) {
-      setTimeout(() => {
-        searchInput.focus();
-      }, 500);
-    }
+    });
   });
 </script>

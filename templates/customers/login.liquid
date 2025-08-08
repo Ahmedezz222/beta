@@ -56,7 +56,7 @@
 
 <!-- Simple Test Page -->
 <div style="background: #f0f9ff; border: 2px solid #3b82f6; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
-  <h2 style="color: #1e40af; margin: 0 0 10px 0;">🔑 Sign-In Page Test</h2>
+  <h2 style="color: #1e40af; margin: 0 0 10px 0;">Sign-In Page Test</h2>
   <p style="color: #374151; margin: 0 0 15px 0;">If you can see this, the sign-in page is loading correctly!</p>
   <div style="background: #dbeafe; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px;">
     URL: <span id="current-url">{{ request.path }}</span><br>
@@ -89,7 +89,6 @@
             <div class="form-group">
               <label for="customer_email" class="form-label">Email Address</label>
               <input type="email" name="customer[email]" id="customer_email" required class="form-input" placeholder="Enter your email address">
-              <div class="input-icon">📧</div>
             </div>
             
             <div class="form-group">
@@ -97,9 +96,8 @@
               <div class="password-input-wrapper">
                 <input type="password" name="customer[password]" id="customer_password" required class="form-input" placeholder="Enter your password">
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                  <span class="toggle-icon">👁️</span>
+                  <span class="toggle-icon">Show</span>
                 </button>
-                <div class="input-icon">🔒</div>
               </div>
             </div>
             
@@ -117,7 +115,7 @@
               <div class="form-errors">
                 {% for field in form.errors %}
                   <p class="error-message">
-                    <span class="error-icon">⚠️</span>
+                    <span class="error-icon">!</span>
                     {{ field | capitalize }} {{ form.errors.messages[field] }}
                   </p>
                 {% endfor %}
@@ -137,11 +135,11 @@
             <p class="social-divider">Or continue with</p>
             <div class="social-buttons">
               <button type="button" class="social-btn google-btn">
-                <span class="social-icon">🔍</span>
+                <span class="social-icon">G</span>
                 <span>Google</span>
               </button>
               <button type="button" class="social-btn facebook-btn">
-                <span class="social-icon">📘</span>
+                <span class="social-icon">f</span>
                 <span>Facebook</span>
               </button>
             </div>
@@ -165,20 +163,17 @@
               <div class="form-group">
                 <label for="register_first_name" class="form-label">First Name</label>
                 <input type="text" name="customer[first_name]" id="register_first_name" required class="form-input" placeholder="Enter your first name">
-                <div class="input-icon">👤</div>
               </div>
               
               <div class="form-group">
                 <label for="register_last_name" class="form-label">Last Name</label>
                 <input type="text" name="customer[last_name]" id="register_last_name" required class="form-input" placeholder="Enter your last name">
-                <div class="input-icon">👤</div>
               </div>
             </div>
             
             <div class="form-group">
               <label for="register_email" class="form-label">Email Address</label>
               <input type="email" name="customer[email]" id="register_email" required class="form-input" placeholder="Enter your email address">
-              <div class="input-icon">📧</div>
             </div>
             
             <div class="form-group">
@@ -186,9 +181,8 @@
               <div class="password-input-wrapper">
                 <input type="password" name="customer[password]" id="register_password" required class="form-input" placeholder="Create a strong password">
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                  <span class="toggle-icon">👁️</span>
+                  <span class="toggle-icon">Show</span>
                 </button>
-                <div class="input-icon">🔒</div>
               </div>
               <div class="password-strength">
                 <div class="strength-bar">
@@ -203,9 +197,8 @@
               <div class="password-input-wrapper">
                 <input type="password" name="customer[password_confirmation]" id="register_password_confirm" required class="form-input" placeholder="Confirm your password">
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                  <span class="toggle-icon">👁️</span>
+                  <span class="toggle-icon">Show</span>
                 </button>
-                <div class="input-icon">🔒</div>
               </div>
             </div>
             
@@ -229,7 +222,7 @@
               <div class="form-errors">
                 {% for field in form.errors %}
                   <p class="error-message">
-                    <span class="error-icon">⚠️</span>
+                    <span class="error-icon">!</span>
                     {{ field | capitalize }} {{ form.errors.messages[field] }}
                   </p>
                 {% endfor %}
@@ -238,7 +231,7 @@
             
             <button type="submit" class="submit-btn register-btn">
               <span class="btn-text">Create Account</span>
-              <span class="btn-icon">👤</span>
+              <span class="btn-icon">+</span>
               <div class="btn-loading">
                 <div class="spinner"></div>
               </div>
@@ -252,7 +245,6 @@
         <h3>Why Create an Account?</h3>
         <div class="benefits-grid">
           <div class="benefit-item">
-            <div class="benefit-icon">📦</div>
             <div class="benefit-content">
               <h4>Order History</h4>
               <p>Track all your past and current orders in one place</p>
@@ -260,7 +252,6 @@
           </div>
           
           <div class="benefit-item">
-            <div class="benefit-icon">📍</div>
             <div class="benefit-content">
               <h4>Saved Addresses</h4>
               <p>Store multiple shipping and billing addresses</p>
@@ -268,7 +259,6 @@
           </div>
           
           <div class="benefit-item">
-            <div class="benefit-icon">💳</div>
             <div class="benefit-content">
               <h4>Quick Checkout</h4>
               <p>Save payment methods for faster purchases</p>
@@ -276,7 +266,6 @@
           </div>
           
           <div class="benefit-item">
-            <div class="benefit-icon">🎁</div>
             <div class="benefit-content">
               <h4>Exclusive Offers</h4>
               <p>Get early access to sales and special promotions</p>
@@ -291,7 +280,7 @@
         <p>Don't want to create an account? You can still shop and checkout as a guest.</p>
         <a href="/collections/all" class="btn btn-outline">
           <span class="btn-text">Shop as Guest</span>
-          <span class="btn-icon">🛒</span>
+          <span class="btn-icon">→</span>
         </a>
       </div>
     </div>
@@ -367,10 +356,10 @@
         
         if (input.type === 'password') {
           input.type = 'text';
-          icon.textContent = '🙈';
+          icon.textContent = 'Hide';
         } else {
           input.type = 'password';
-          icon.textContent = '👁️';
+          icon.textContent = 'Show';
         }
       });
     });
@@ -457,7 +446,7 @@
       
       const errorDiv = document.createElement('div');
       errorDiv.className = 'form-error';
-      errorDiv.innerHTML = `<p class="error-message"><span class="error-icon">⚠️</span> ${message}</p>`;
+      errorDiv.innerHTML = `<p class="error-message"><span class="error-icon">!</span> ${message}</p>`;
       
       const submitBtn = form.querySelector('button[type="submit"]');
       if (submitBtn) {

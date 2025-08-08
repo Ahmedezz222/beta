@@ -16,7 +16,7 @@
               <div class="password-input-wrapper">
                 <input type="password" name="customer[password]" id="customer_password" required class="form-input" placeholder="Create a new password">
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                  <span class="toggle-icon">👁️</span>
+                  <span class="toggle-icon">Show</span>
                 </button>
               </div>
               <small class="password-hint">Password must be at least 6 characters long</small>
@@ -27,7 +27,7 @@
               <div class="password-input-wrapper">
                 <input type="password" name="customer[password_confirmation]" id="customer_password_confirmation" required class="form-input" placeholder="Confirm your password">
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                  <span class="toggle-icon">👁️</span>
+                  <span class="toggle-icon">Show</span>
                 </button>
               </div>
             </div>
@@ -42,7 +42,7 @@
             
             <button type="submit" class="submit-btn">
               <span class="btn-text">Activate Account</span>
-              <span class="btn-icon">✅</span>
+              <span class="btn-icon">Activate</span>
             </button>
           {% endform %}
         </div>
@@ -52,7 +52,7 @@
         <h3>Welcome to Bike Yard!</h3>
         <div class="benefits-grid">
           <div class="benefit-item">
-            <div class="benefit-icon">🚴</div>
+            <div class="benefit-icon">Bike</div>
             <div class="benefit-content">
               <h4>Start Shopping</h4>
               <p>Browse our collection of bikes and accessories</p>
@@ -60,7 +60,7 @@
           </div>
           
           <div class="benefit-item">
-            <div class="benefit-icon">📦</div>
+            <div class="benefit-icon">Orders</div>
             <div class="benefit-content">
               <h4>Track Orders</h4>
               <p>Monitor your orders and delivery status</p>
@@ -68,7 +68,7 @@
           </div>
           
           <div class="benefit-item">
-            <div class="benefit-icon">💳</div>
+            <div class="benefit-icon">Payment</div>
             <div class="benefit-content">
               <h4>Save Payment</h4>
               <p>Store payment methods for quick checkout</p>
@@ -76,7 +76,7 @@
           </div>
           
           <div class="benefit-item">
-            <div class="benefit-icon">🎁</div>
+            <div class="benefit-icon">Offers</div>
             <div class="benefit-content">
               <h4>Exclusive Offers</h4>
               <p>Get access to member-only deals and promotions</p>
@@ -125,10 +125,10 @@
         
         if (input.type === 'password') {
           input.type = 'text';
-          icon.textContent = '🙈';
+          icon.textContent = 'Hide';
         } else {
           input.type = 'password';
-          icon.textContent = '👁️';
+          icon.textContent = 'Show';
         }
       });
     });
