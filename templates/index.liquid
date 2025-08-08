@@ -4,9 +4,15 @@
   <div class="container">
     <div class="hero-content">
       <h1 id="hero-title">Welcome to Bike Yard</h1>
+      <p class="hero-subtitle">Your premier destination for quality bikes, expert service, and a welcoming community</p>
       <div class="hero-buttons">
         <a href="/collections/all" class="btn btn-primary">Shop Now</a>
-        <a href="{{ 'Menu.pdf' | asset_url }}" class="btn btn-secondary" target="_blank" rel="noopener">Cafe Menu</a>
+        <a href="/account" class="btn btn-secondary">Sign In</a>
+        <a href="{{ 'Menu.pdf' | asset_url }}" class="btn btn-outline" target="_blank" rel="noopener">Cafe Menu</a>
+      </div>
+      <div class="hero-account-info">
+        <p>Already have an account? <a href="/account" class="account-link">Sign in</a> to view your orders and preferences</p>
+        <p>New customer? <a href="/account" class="account-link">Create an account</a> for faster checkout and order tracking</p>
       </div>
     </div>
   </div>
@@ -244,6 +250,46 @@
         </div>
         <a href="/pages/cafe-menu" class="service-link">View Menu</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Account CTA Section -->
+<section class="account-cta-section" aria-labelledby="account-cta-title">
+  <div class="container">
+    <div class="account-cta-content">
+      <h2 id="account-cta-title">Join the Bike Yard Community</h2>
+      <p>Create an account to unlock exclusive benefits and streamline your shopping experience</p>
+      
+      <div class="account-benefits">
+        <div class="benefit-card">
+          <div class="benefit-icon">📦</div>
+          <h3>Order Tracking</h3>
+          <p>Track all your orders in one place with real-time updates</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">💳</div>
+          <h3>Quick Checkout</h3>
+          <p>Save payment methods and addresses for faster purchases</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🎁</div>
+          <h3>Exclusive Offers</h3>
+          <p>Get early access to sales and member-only promotions</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📱</div>
+          <h3>Account Dashboard</h3>
+          <p>Manage your preferences and view order history</p>
+        </div>
+      </div>
+      
+      <div class="account-actions">
+        <a href="/account" class="btn btn-primary">Create Account</a>
+        <a href="/account" class="btn btn-secondary">Sign In</a>
+      </div>
+      
+      <p class="guest-note">Don't want an account? <a href="/collections/all">Shop as guest</a></p>
     </div>
   </div>
 </section>
