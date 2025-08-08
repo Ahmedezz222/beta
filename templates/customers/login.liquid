@@ -1,20 +1,28 @@
 <main class="login-page" role="main">
   <div class="container">
     <div class="login-content">
+      <!-- Header Section -->
       <div class="login-header">
+        <div class="header-logo">
+          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" class="logo-image">
+        </div>
         <h1>Welcome Back</h1>
         <p>Sign in to your account to manage your orders and preferences</p>
       </div>
 
       <div class="login-forms">
         <!-- Sign In Section -->
-        <div class="login-form-section">
-          <h2>Sign In</h2>
+        <div class="login-form-section signin-section">
+          <div class="section-header">
+            <h2>Sign In</h2>
+            <p>Access your account to view orders and manage preferences</p>
+          </div>
           
           {% form 'customer_login' %}
             <div class="form-group">
               <label for="customer_email" class="form-label">Email Address</label>
-              <input type="email" name="customer[email]" id="customer_email" required class="form-input" placeholder="Enter your email">
+              <input type="email" name="customer[email]" id="customer_email" required class="form-input" placeholder="Enter your email address">
+              <div class="input-icon">📧</div>
             </div>
             
             <div class="form-group">
@@ -24,6 +32,7 @@
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
                   <span class="toggle-icon">👁️</span>
                 </button>
+                <div class="input-icon">🔒</div>
               </div>
             </div>
             
@@ -31,7 +40,7 @@
               <label class="form-checkbox">
                 <input type="checkbox" name="customer[remember_me]" id="remember_me">
                 <span class="checkmark"></span>
-                Remember me
+                Remember me for 30 days
               </label>
               
               <a href="/account/recover" class="forgot-password">Forgot password?</a>
@@ -40,16 +49,36 @@
             {% if form.errors %}
               <div class="form-errors">
                 {% for field in form.errors %}
-                  <p class="error-message">{{ field | capitalize }} {{ form.errors.messages[field] }}</p>
+                  <p class="error-message">
+                    <span class="error-icon">⚠️</span>
+                    {{ field | capitalize }} {{ form.errors.messages[field] }}
+                  </p>
                 {% endfor %}
               </div>
             {% endif %}
             
-            <button type="submit" class="submit-btn">
+            <button type="submit" class="submit-btn signin-btn">
               <span class="btn-text">Sign In</span>
               <span class="btn-icon">→</span>
+              <div class="btn-loading">
+                <div class="spinner"></div>
+              </div>
             </button>
           {% endform %}
+          
+          <div class="social-login">
+            <p class="social-divider">Or continue with</p>
+            <div class="social-buttons">
+              <button type="button" class="social-btn google-btn">
+                <span class="social-icon">🔍</span>
+                <span>Google</span>
+              </button>
+              <button type="button" class="social-btn facebook-btn">
+                <span class="social-icon">📘</span>
+                <span>Facebook</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- Divider -->
@@ -58,37 +87,48 @@
         </div>
 
         <!-- Register Section -->
-        <div class="login-form-section">
-          <h2>Create Account</h2>
-          <p class="section-description">New to Bike Yard? Create an account to start shopping and track your orders.</p>
+        <div class="login-form-section register-section">
+          <div class="section-header">
+            <h2>Create Account</h2>
+            <p>New to Bike Yard? Join us for exclusive benefits and faster checkout</p>
+          </div>
           
           {% form 'customer_register' %}
             <div class="form-row">
               <div class="form-group">
                 <label for="register_first_name" class="form-label">First Name</label>
                 <input type="text" name="customer[first_name]" id="register_first_name" required class="form-input" placeholder="Enter your first name">
+                <div class="input-icon">👤</div>
               </div>
               
               <div class="form-group">
                 <label for="register_last_name" class="form-label">Last Name</label>
                 <input type="text" name="customer[last_name]" id="register_last_name" required class="form-input" placeholder="Enter your last name">
+                <div class="input-icon">👤</div>
               </div>
             </div>
             
             <div class="form-group">
               <label for="register_email" class="form-label">Email Address</label>
-              <input type="email" name="customer[email]" id="register_email" required class="form-input" placeholder="Enter your email">
+              <input type="email" name="customer[email]" id="register_email" required class="form-input" placeholder="Enter your email address">
+              <div class="input-icon">📧</div>
             </div>
             
             <div class="form-group">
               <label for="register_password" class="form-label">Password</label>
               <div class="password-input-wrapper">
-                <input type="password" name="customer[password]" id="register_password" required class="form-input" placeholder="Create a password">
+                <input type="password" name="customer[password]" id="register_password" required class="form-input" placeholder="Create a strong password">
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
                   <span class="toggle-icon">👁️</span>
                 </button>
+                <div class="input-icon">🔒</div>
               </div>
-              <small class="password-hint">Password must be at least 6 characters long</small>
+              <div class="password-strength">
+                <div class="strength-bar">
+                  <div class="strength-fill"></div>
+                </div>
+                <small class="password-hint">Password must be at least 6 characters long</small>
+              </div>
             </div>
             
             <div class="form-group">
@@ -98,6 +138,7 @@
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
                   <span class="toggle-icon">👁️</span>
                 </button>
+                <div class="input-icon">🔒</div>
               </div>
             </div>
             
@@ -109,17 +150,31 @@
               </label>
             </div>
             
+            <div class="form-group">
+              <label class="form-checkbox">
+                <input type="checkbox" id="terms_agreement" required>
+                <span class="checkmark"></span>
+                I agree to the <a href="/pages/terms" target="_blank">Terms of Service</a> and <a href="/pages/privacy" target="_blank">Privacy Policy</a>
+              </label>
+            </div>
+            
             {% if form.errors %}
               <div class="form-errors">
                 {% for field in form.errors %}
-                  <p class="error-message">{{ field | capitalize }} {{ form.errors.messages[field] }}</p>
+                  <p class="error-message">
+                    <span class="error-icon">⚠️</span>
+                    {{ field | capitalize }} {{ form.errors.messages[field] }}
+                  </p>
                 {% endfor %}
               </div>
             {% endif %}
             
-            <button type="submit" class="submit-btn">
+            <button type="submit" class="submit-btn register-btn">
               <span class="btn-text">Create Account</span>
               <span class="btn-icon">👤</span>
+              <div class="btn-loading">
+                <div class="spinner"></div>
+              </div>
             </button>
           {% endform %}
         </div>
@@ -177,7 +232,7 @@
 </main>
 
 <script>
-  // Login page functionality
+  // Enhanced login page functionality
   document.addEventListener('DOMContentLoaded', function() {
     // Password confirmation validation
     const passwordInput = document.getElementById('register_password');
@@ -202,7 +257,36 @@
           confirmInput.setCustomValidity('');
           confirmInput.classList.remove('error');
         }
+        
+        // Update password strength
+        updatePasswordStrength(this.value);
       });
+    }
+    
+    // Password strength indicator
+    function updatePasswordStrength(password) {
+      const strengthFill = document.querySelector('.strength-fill');
+      const strengthBar = document.querySelector('.strength-bar');
+      
+      if (!strengthFill || !strengthBar) return;
+      
+      let strength = 0;
+      if (password.length >= 6) strength += 25;
+      if (password.match(/[a-z]/)) strength += 25;
+      if (password.match(/[A-Z]/)) strength += 25;
+      if (password.match(/[0-9]/)) strength += 25;
+      
+      strengthFill.style.width = strength + '%';
+      
+      if (strength <= 25) {
+        strengthFill.style.backgroundColor = '#ef4444';
+      } else if (strength <= 50) {
+        strengthFill.style.backgroundColor = '#f59e0b';
+      } else if (strength <= 75) {
+        strengthFill.style.backgroundColor = '#10b981';
+      } else {
+        strengthFill.style.backgroundColor = '#059669';
+      }
     }
     
     // Password toggle functionality
@@ -222,7 +306,7 @@
       });
     });
     
-    // Form validation
+    // Form validation and submission
     const loginForm = document.querySelector('form[action*="login"]');
     const registerForm = document.querySelector('form[action*="register"]');
     
@@ -233,8 +317,13 @@
         
         if (!email || !password) {
           e.preventDefault();
-          showError('Please fill in all required fields');
+          showError('Please fill in all required fields', loginForm);
+          return;
         }
+        
+        // Show loading state
+        const submitBtn = loginForm.querySelector('.submit-btn');
+        submitBtn.classList.add('loading');
       });
     }
     
@@ -245,24 +334,35 @@
         const email = document.getElementById('register_email').value.trim();
         const password = document.getElementById('register_password').value;
         const confirmPassword = document.getElementById('register_password_confirm').value;
+        const termsAgreement = document.getElementById('terms_agreement').checked;
         
         if (!firstName || !lastName || !email || !password || !confirmPassword) {
           e.preventDefault();
-          showError('Please fill in all required fields');
+          showError('Please fill in all required fields', registerForm);
           return;
         }
         
         if (password !== confirmPassword) {
           e.preventDefault();
-          showError('Passwords do not match');
+          showError('Passwords do not match', registerForm);
           return;
         }
         
         if (password.length < 6) {
           e.preventDefault();
-          showError('Password must be at least 6 characters long');
+          showError('Password must be at least 6 characters long', registerForm);
           return;
         }
+        
+        if (!termsAgreement) {
+          e.preventDefault();
+          showError('Please agree to the Terms of Service and Privacy Policy', registerForm);
+          return;
+        }
+        
+        // Show loading state
+        const submitBtn = registerForm.querySelector('.submit-btn');
+        submitBtn.classList.add('loading');
       });
     }
     
@@ -274,37 +374,61 @@
       }, 500);
     }
     
-    // Error display function
-    function showError(message) {
-      const existingError = document.querySelector('.form-error');
+    // Enhanced error display function
+    function showError(message, form) {
+      const existingError = form.querySelector('.form-error');
       if (existingError) {
         existingError.remove();
       }
       
       const errorDiv = document.createElement('div');
       errorDiv.className = 'form-error';
-      errorDiv.innerHTML = `<p class="error-message">${message}</p>`;
+      errorDiv.innerHTML = `<p class="error-message"><span class="error-icon">⚠️</span> ${message}</p>`;
       
-      const form = document.querySelector('.login-form-section form');
-      if (form) {
-        form.insertBefore(errorDiv, form.querySelector('button'));
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        form.insertBefore(errorDiv, submitBtn);
       }
     }
     
-    // Real-time validation
+    // Real-time validation with visual feedback
     const inputs = document.querySelectorAll('.form-input');
     inputs.forEach(input => {
       input.addEventListener('blur', function() {
         if (this.hasAttribute('required') && !this.value.trim()) {
           this.classList.add('error');
+          this.parentNode.classList.add('error');
         } else {
           this.classList.remove('error');
+          this.parentNode.classList.remove('error');
         }
       });
       
       input.addEventListener('input', function() {
         if (this.classList.contains('error') && this.value.trim()) {
           this.classList.remove('error');
+          this.parentNode.classList.remove('error');
+        }
+      });
+    });
+    
+    // Social login buttons (placeholder functionality)
+    const socialButtons = document.querySelectorAll('.social-btn');
+    socialButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Placeholder for social login integration
+        alert('Social login functionality would be integrated here');
+      });
+    });
+    
+    // Smooth scrolling for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
