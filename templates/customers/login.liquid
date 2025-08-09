@@ -98,68 +98,84 @@
           {% form 'customer_register' %}
             <div class="form-row">
               <div class="form-group">
-                <label for="register_first_name" class="form-label">First Name</label>
+                <label for="register_first_name" class="form-label">First Name <span class="required">*</span></label>
                 <input type="text" name="customer[first_name]" id="register_first_name" required class="form-input" placeholder="Enter your first name">
+                <div class="field-error" id="first_name_error"></div>
               </div>
               
               <div class="form-group">
-                <label for="register_last_name" class="form-label">Last Name</label>
+                <label for="register_last_name" class="form-label">Last Name <span class="required">*</span></label>
                 <input type="text" name="customer[last_name]" id="register_last_name" required class="form-input" placeholder="Enter your last name">
+                <div class="field-error" id="last_name_error"></div>
               </div>
             </div>
             
             <div class="form-group">
-              <label for="register_email" class="form-label">Email Address</label>
+              <label for="register_email" class="form-label">Email Address <span class="required">*</span></label>
               <input type="email" name="customer[email]" id="register_email" required class="form-input" placeholder="Enter your email address">
+              <div class="field-error" id="email_error"></div>
             </div>
             
             <div class="form-group">
-              <label for="register_password" class="form-label">Password</label>
+              <label for="register_password" class="form-label">Password <span class="required">*</span></label>
               <div class="password-input-wrapper">
-                <input type="password" name="customer[password]" id="register_password" required class="form-input" placeholder="Create a strong password">
+                <input type="password" name="customer[password]" id="register_password" required class="form-input" placeholder="Create a strong password" minlength="6">
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                  <span class="toggle-icon">Show</span>
+                  <span class="toggle-icon">👁️</span>
                 </button>
               </div>
               <div class="password-strength">
                 <div class="strength-bar">
                   <div class="strength-fill"></div>
                 </div>
+                <div class="strength-text">
+                  <span class="strength-label">Password Strength:</span>
+                  <span class="strength-value" id="strength_value">Weak</span>
+                </div>
                 <small class="password-hint">Password must be at least 6 characters long</small>
               </div>
+              <div class="field-error" id="password_error"></div>
             </div>
             
             <div class="form-group">
-              <label for="register_password_confirm" class="form-label">Confirm Password</label>
+              <label for="register_password_confirm" class="form-label">Confirm Password <span class="required">*</span></label>
               <div class="password-input-wrapper">
                 <input type="password" name="customer[password_confirmation]" id="register_password_confirm" required class="form-input" placeholder="Confirm your password">
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                  <span class="toggle-icon">Show</span>
+                  <span class="toggle-icon">👁️</span>
                 </button>
               </div>
+              <div class="field-error" id="confirm_password_error"></div>
             </div>
             
             <div class="form-group">
-              <label class="form-checkbox">
+              <label class="form-checkbox marketing-checkbox">
                 <input type="checkbox" name="customer[accepts_marketing]" id="accepts_marketing">
                 <span class="checkmark"></span>
-                Subscribe to our newsletter for updates and exclusive offers
+                <div class="checkbox-text">
+                  <span class="checkbox-label">Subscribe to our newsletter</span>
+                  <span class="checkbox-description">Get updates and exclusive offers</span>
+                </div>
               </label>
             </div>
             
             <div class="form-group">
-              <label class="form-checkbox">
+              <label class="form-checkbox terms-checkbox">
                 <input type="checkbox" id="terms_agreement" required>
                 <span class="checkmark"></span>
-                I agree to the <a href="/pages/terms" target="_blank">Terms of Service</a> and <a href="/pages/privacy" target="_blank">Privacy Policy</a>
+                <div class="checkbox-text">
+                  <span class="checkbox-label">I agree to the <a href="/pages/terms" target="_blank" class="terms-link">Terms of Service</a> and <a href="/pages/privacy" target="_blank" class="terms-link">Privacy Policy</a></span>
+                  <span class="checkbox-description">You must agree to continue</span>
+                </div>
               </label>
+              <div class="field-error" id="terms_error"></div>
             </div>
             
             {% if form.errors %}
               <div class="form-errors">
                 {% for field in form.errors %}
                   <p class="error-message">
-                    <span class="error-icon">!</span>
+                    <span class="error-icon">⚠️</span>
                     {{ field | capitalize }} {{ form.errors.messages[field] }}
                   </p>
                 {% endfor %}
@@ -168,12 +184,23 @@
             
             <button type="submit" class="submit-btn register-btn">
               <span class="btn-text">Create Account</span>
-              <span class="btn-icon">+</span>
+              <span class="btn-icon">🚀</span>
               <div class="btn-loading">
                 <div class="spinner"></div>
               </div>
             </button>
           {% endform %}
+          
+          <div class="registration-benefits">
+            <h4>Account Benefits</h4>
+            <ul class="benefits-list">
+              <li>📦 Order tracking and history</li>
+              <li>🏠 Saved shipping addresses</li>
+              <li>💳 Quick checkout process</li>
+              <li>🎁 Exclusive member discounts</li>
+              <li>📱 Mobile app access</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -229,58 +256,190 @@
   document.addEventListener('DOMContentLoaded', function() {
     console.log('Sign-in page JavaScript loaded');
     
+    // Enhanced form validation for registration
+    const registerForm = document.querySelector('form[action*="register"]');
+    const loginForm = document.querySelector('form[action*="login"]');
+    
+    // Field validation functions
+    function validateField(field, errorElement, validationRules) {
+      const value = field.value.trim();
+      let isValid = true;
+      let errorMessage = '';
+      
+      // Required field validation
+      if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        errorMessage = 'This field is required';
+      }
+      
+      // Email validation
+      if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          isValid = false;
+          errorMessage = 'Please enter a valid email address';
+        }
+      }
+      
+      // Password validation
+      if (field.id === 'register_password' && value) {
+        if (value.length < 6) {
+          isValid = false;
+          errorMessage = 'Password must be at least 6 characters long';
+        }
+      }
+      
+      // Custom validation rules
+      if (validationRules) {
+        for (const rule of validationRules) {
+          if (!rule.test(value)) {
+            isValid = false;
+            errorMessage = rule.message;
+            break;
+          }
+        }
+      }
+      
+      // Update field appearance and error message
+      if (isValid) {
+        field.classList.remove('error');
+        field.classList.add('valid');
+        if (errorElement) {
+          errorElement.textContent = '';
+          errorElement.style.display = 'none';
+        }
+      } else {
+        field.classList.remove('valid');
+        field.classList.add('error');
+        if (errorElement) {
+          errorElement.textContent = errorMessage;
+          errorElement.style.display = 'block';
+        }
+      }
+      
+      return isValid;
+    }
+    
+    // Real-time field validation
+    const registerFields = document.querySelectorAll('#register_first_name, #register_last_name, #register_email, #register_password, #register_password_confirm');
+    registerFields.forEach(field => {
+      const errorElement = document.getElementById(field.id + '_error');
+      
+      field.addEventListener('blur', () => {
+        validateField(field, errorElement);
+      });
+      
+      field.addEventListener('input', () => {
+        if (field.classList.contains('error')) {
+          validateField(field, errorElement);
+        }
+      });
+    });
+    
     // Password confirmation validation
     const passwordInput = document.getElementById('register_password');
     const confirmInput = document.getElementById('register_password_confirm');
     
     if (passwordInput && confirmInput) {
       confirmInput.addEventListener('input', function() {
-        if (this.value !== passwordInput.value) {
-          this.setCustomValidity('Passwords do not match');
+        const password = passwordInput.value;
+        const confirmPassword = this.value;
+        const errorElement = document.getElementById('confirm_password_error');
+        
+        if (confirmPassword && password !== confirmPassword) {
           this.classList.add('error');
-        } else {
-          this.setCustomValidity('');
+          this.classList.remove('valid');
+          errorElement.textContent = 'Passwords do not match';
+          errorElement.style.display = 'block';
+        } else if (confirmPassword) {
           this.classList.remove('error');
+          this.classList.add('valid');
+          errorElement.textContent = '';
+          errorElement.style.display = 'none';
         }
       });
       
       passwordInput.addEventListener('input', function() {
-        if (confirmInput.value && this.value !== confirmInput.value) {
-          confirmInput.setCustomValidity('Passwords do not match');
+        const password = this.value;
+        const confirmPassword = confirmInput.value;
+        const errorElement = document.getElementById('confirm_password_error');
+        
+        if (confirmPassword && password !== confirmPassword) {
           confirmInput.classList.add('error');
-        } else {
-          confirmInput.setCustomValidity('');
+          confirmInput.classList.remove('valid');
+          errorElement.textContent = 'Passwords do not match';
+          errorElement.style.display = 'block';
+        } else if (confirmPassword) {
           confirmInput.classList.remove('error');
+          confirmInput.classList.add('valid');
+          errorElement.textContent = '';
+          errorElement.style.display = 'none';
         }
         
         // Update password strength
-        updatePasswordStrength(this.value);
+        updatePasswordStrength(password);
       });
     }
     
-    // Password strength indicator
+    // Enhanced password strength indicator
     function updatePasswordStrength(password) {
       const strengthFill = document.querySelector('.strength-fill');
       const strengthBar = document.querySelector('.strength-bar');
+      const strengthValue = document.getElementById('strength_value');
       
-      if (!strengthFill || !strengthBar) return;
+      if (!strengthFill || !strengthBar || !strengthValue) return;
       
       let strength = 0;
-      if (password.length >= 6) strength += 25;
-      if (password.match(/[a-z]/)) strength += 25;
-      if (password.match(/[A-Z]/)) strength += 25;
-      if (password.match(/[0-9]/)) strength += 25;
+      let feedback = [];
       
+      // Length check
+      if (password.length >= 6) strength += 20;
+      if (password.length >= 8) strength += 10;
+      if (password.length >= 12) strength += 10;
+      
+      // Character variety checks
+      if (password.match(/[a-z]/)) strength += 15;
+      if (password.match(/[A-Z]/)) strength += 15;
+      if (password.match(/[0-9]/)) strength += 15;
+      if (password.match(/[^A-Za-z0-9]/)) strength += 15;
+      
+      // Cap strength at 100
+      strength = Math.min(strength, 100);
+      
+      // Update visual indicator
       strengthFill.style.width = strength + '%';
       
+      // Update strength text and color
       if (strength <= 25) {
         strengthFill.style.backgroundColor = '#ef4444';
+        strengthValue.textContent = 'Weak';
+        strengthValue.style.color = '#ef4444';
       } else if (strength <= 50) {
         strengthFill.style.backgroundColor = '#f59e0b';
+        strengthValue.textContent = 'Fair';
+        strengthValue.style.color = '#f59e0b';
       } else if (strength <= 75) {
         strengthFill.style.backgroundColor = '#10b981';
+        strengthValue.textContent = 'Good';
+        strengthValue.style.color = '#10b981';
       } else {
         strengthFill.style.backgroundColor = '#059669';
+        strengthValue.textContent = 'Strong';
+        strengthValue.style.color = '#059669';
+      }
+      
+      // Update password hint with specific feedback
+      const hintElement = document.querySelector('.password-hint');
+      if (hintElement) {
+        if (strength <= 25) {
+          hintElement.textContent = 'Add numbers, symbols, and mixed case letters';
+        } else if (strength <= 50) {
+          hintElement.textContent = 'Good start! Try adding more variety';
+        } else if (strength <= 75) {
+          hintElement.textContent = 'Almost there! Consider adding symbols';
+        } else {
+          hintElement.textContent = 'Excellent! Your password is strong';
+        }
       }
     }
     
@@ -293,18 +452,72 @@
         
         if (input.type === 'password') {
           input.type = 'text';
-          icon.textContent = 'Hide';
+          icon.textContent = '🙈';
         } else {
           input.type = 'password';
-          icon.textContent = 'Show';
+          icon.textContent = '👁️';
         }
       });
     });
     
-    // Form validation and submission
-    const loginForm = document.querySelector('form[action*="login"]');
-    const registerForm = document.querySelector('form[action*="register"]');
+    // Enhanced form submission validation
+    if (registerForm) {
+      console.log('Register form found');
+      registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate all fields
+        let isFormValid = true;
+        const fields = ['register_first_name', 'register_last_name', 'register_email', 'register_password', 'register_password_confirm'];
+        
+        fields.forEach(fieldId => {
+          const field = document.getElementById(fieldId);
+          const errorElement = document.getElementById(fieldId + '_error');
+          if (!validateField(field, errorElement)) {
+            isFormValid = false;
+          }
+        });
+        
+        // Check password confirmation
+        if (passwordInput && confirmInput && passwordInput.value !== confirmInput.value) {
+          isFormValid = false;
+          confirmInput.classList.add('error');
+          const errorElement = document.getElementById('confirm_password_error');
+          errorElement.textContent = 'Passwords do not match';
+          errorElement.style.display = 'block';
+        }
+        
+        // Check terms agreement
+        const termsAgreement = document.getElementById('terms_agreement');
+        if (!termsAgreement.checked) {
+          isFormValid = false;
+          const errorElement = document.getElementById('terms_error');
+          errorElement.textContent = 'You must agree to the Terms of Service and Privacy Policy';
+          errorElement.style.display = 'block';
+        }
+        
+        if (isFormValid) {
+          // Show loading state
+          const submitBtn = registerForm.querySelector('.submit-btn');
+          submitBtn.classList.add('loading');
+          
+          // Simulate form submission (remove this in production)
+          setTimeout(() => {
+            console.log('Register form submitted successfully');
+            // Here you would normally submit the form
+            // registerForm.submit();
+          }, 2000);
+        } else {
+          // Scroll to first error
+          const firstError = document.querySelector('.field-error[style*="block"]');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    }
     
+    // Login form validation
     if (loginForm) {
       console.log('Login form found');
       loginForm.addEventListener('submit', function(e) {
@@ -321,47 +534,6 @@
         const submitBtn = loginForm.querySelector('.submit-btn');
         submitBtn.classList.add('loading');
         console.log('Login form submitted');
-      });
-    }
-    
-    if (registerForm) {
-      console.log('Register form found');
-      registerForm.addEventListener('submit', function(e) {
-        const firstName = document.getElementById('register_first_name').value.trim();
-        const lastName = document.getElementById('register_last_name').value.trim();
-        const email = document.getElementById('register_email').value.trim();
-        const password = document.getElementById('register_password').value;
-        const confirmPassword = document.getElementById('register_password_confirm').value;
-        const termsAgreement = document.getElementById('terms_agreement').checked;
-        
-        if (!firstName || !lastName || !email || !password || !confirmPassword) {
-          e.preventDefault();
-          showError('Please fill in all required fields', registerForm);
-          return;
-        }
-        
-        if (password !== confirmPassword) {
-          e.preventDefault();
-          showError('Passwords do not match', registerForm);
-          return;
-        }
-        
-        if (password.length < 6) {
-          e.preventDefault();
-          showError('Password must be at least 6 characters long', registerForm);
-          return;
-        }
-        
-        if (!termsAgreement) {
-          e.preventDefault();
-          showError('Please agree to the Terms of Service and Privacy Policy', registerForm);
-          return;
-        }
-        
-        // Show loading state
-        const submitBtn = registerForm.querySelector('.submit-btn');
-        submitBtn.classList.add('loading');
-        console.log('Register form submitted');
       });
     }
     
@@ -383,7 +555,7 @@
       
       const errorDiv = document.createElement('div');
       errorDiv.className = 'form-error';
-      errorDiv.innerHTML = `<p class="error-message"><span class="error-icon">!</span> ${message}</p>`;
+      errorDiv.innerHTML = `<p class="error-message"><span class="error-icon">⚠️</span> ${message}</p>`;
       
       const submitBtn = form.querySelector('button[type="submit"]');
       if (submitBtn) {
@@ -430,6 +602,28 @@
         if (target) {
           target.scrollIntoView({ behavior: 'smooth' });
         }
+      });
+    });
+    
+    // Add success state to form fields
+    const addSuccessState = (field) => {
+      field.classList.add('valid');
+      field.classList.remove('error');
+    };
+    
+    // Remove success state from form fields
+    const removeSuccessState = (field) => {
+      field.classList.remove('valid');
+    };
+    
+    // Enhanced input focus effects
+    inputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.parentNode.classList.add('focused');
+      });
+      
+      input.addEventListener('blur', function() {
+        this.parentNode.classList.remove('focused');
       });
     });
     
