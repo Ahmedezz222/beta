@@ -43,7 +43,7 @@
                 Remember me for 30 days
               </label>
               
-              <a href="/account/recover" class="forgot-password">Forgot password?</a>
+              <a href="{{ routes.account_recover_url }}" class="forgot-password">Forgot password?</a>
             </div>
             
             {% if form.errors %}
@@ -95,7 +95,7 @@
             <p>New to Bike Yard? Join us for exclusive benefits and faster checkout</p>
           </div>
           
-          {% form 'customer_register' %}
+          {% form 'create_customer' %}
             <div class="form-row">
               <div class="form-group">
                 <label for="register_first_name" class="form-label">First Name <span class="required">*</span></label>
@@ -242,7 +242,7 @@
       <div class="guest-checkout">
         <h3>Continue as Guest</h3>
         <p>Don't want to create an account? You can still shop and checkout as a guest.</p>
-        <a href="/collections/all" class="btn btn-outline">
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-outline">
           <span class="btn-text">Shop as Guest</span>
           <span class="btn-icon">→</span>
         </a>
