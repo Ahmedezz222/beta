@@ -156,7 +156,7 @@
             {% endif %}
           {% else %}
             <div class="empty-blog">
-              <div class="empty-icon">No Posts</div>
+              {% render 'icon-text', icon_text: 'No Posts' %}
               <h2>No articles yet</h2>
               <p>Check back soon for cycling tips, product reviews, and community stories.</p>
               <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Browse Products</a>

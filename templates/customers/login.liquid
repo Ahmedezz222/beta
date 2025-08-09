@@ -50,13 +50,13 @@
               <div class="form-errors" role="alert">
                 {% if form.errors.messages['form'] %}
                   <p class="error-message">
-                    <span class="error-icon">!</span>
+                    {% render 'icon-symbol', icon_symbol: '!' %}
                     {{ form.errors.messages['form'] }}
                   </p>
                 {% else %}
                   {% for field in form.errors %}
                     <p class="error-message">
-                      <span class="error-icon">!</span>
+                      {% render 'icon-symbol', icon_symbol: '!' %}
                       {{ field | capitalize }} {{ form.errors.messages[field] }}
                     </p>
                   {% endfor %}
@@ -66,7 +66,7 @@
             
             <button type="submit" class="submit-btn signin-btn">
               <span class="btn-text">Sign In</span>
-              <span class="btn-icon">→</span>
+              {% render 'icon-symbol', icon_symbol: '→' %}
               <div class="btn-loading">
                 <div class="spinner"></div>
               </div>
@@ -77,11 +77,11 @@
             <p class="social-divider">Or continue with</p>
             <div class="social-buttons">
               <button type="button" class="social-btn google-btn">
-                <span class="social-icon">G</span>
+                {% render 'icon-text', icon_text: 'G' %}
                 <span>Google</span>
               </button>
               <button type="button" class="social-btn facebook-btn">
-                <span class="social-icon">f</span>
+                {% render 'icon-text', icon_text: 'f' %}
                 <span>Facebook</span>
               </button>
             </div>
@@ -121,7 +121,7 @@
               <div class="password-input-wrapper">
                 <input type="password" name="customer[password]" id="register_password" required class="form-input" placeholder="Create a strong password" minlength="6">
                 <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                  <span class="toggle-icon">👁️</span>
+                  {% render 'icon-symbol', icon_symbol: '👁️' %}
                 </button>
               </div>
               <div class="password-strength">

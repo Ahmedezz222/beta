@@ -31,10 +31,10 @@
         
         <div class="view-toggle">
           <button class="view-btn grid-view active" data-view="grid" aria-label="Grid view">
-            <span class="icon">⊞</span>
+            {% render 'icon-symbol', icon_symbol: '⊞' %}
           </button>
           <button class="view-btn list-view" data-view="list" aria-label="List view">
-            <span class="icon">☰</span>
+            {% render 'icon-symbol', icon_symbol: '☰' %}
           </button>
         </div>
       </div>
@@ -82,7 +82,7 @@
               <article class="product-card" data-product-id="{{ product.id }}">
                 <div class="product-image">
                   <a href="{{ product.url }}" aria-label="{{ product.title }}">
-                    <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" loading="lazy">
+                    <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" loading="lazy" width="300" height="200">
                   </a>
                   {% if product.compare_at_price > product.price %}
                     <span class="sale-badge">Sale</span>
@@ -115,7 +115,7 @@
                   <div class="product-actions">
                     <button class="quick-add-btn" data-product-id="{{ product.id }}">
                       <span class="btn-text">Quick Add</span>
-                      <span class="btn-icon">+</span>
+                      {% render 'icon-symbol', icon_symbol: '+' %}
                     </button>
                   </div>
                 </div>
@@ -150,7 +150,7 @@
           {% endif %}
         {% else %}
           <div class="empty-collection">
-            <div class="empty-icon">No Products</div>
+            {% render 'icon-text', icon_text: 'No Products' %}
             <h2>No products found</h2>
             <p>We couldn't find any products matching your criteria. Try adjusting your filters or browse our other collections.</p>
             <a href="/collections/all" class="btn btn-primary">Browse All Products</a>

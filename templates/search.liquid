@@ -7,7 +7,7 @@
           <div class="search-input-group">
             <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search for bikes, parts, accessories..." class="search-input" aria-label="Search">
             <button type="submit" class="search-btn" aria-label="Search">
-              <span class="search-icon">Search</span>
+              {% render 'icon-text', icon_text: 'Search' %}
             </button>
           </div>
           
@@ -93,7 +93,7 @@
                   {% if item.object_type == 'product' %}
                     <div class="result-image">
                       <a href="{{ item.url }}">
-                        <img src="{{ item.featured_image | img_url: 'medium' }}" alt="{{ item.title }}" loading="lazy">
+                        <img src="{{ item.featured_image | img_url: 'medium' }}" alt="{{ item.title }}" loading="lazy" width="200" height="150">
                       </a>
                     </div>
                     
@@ -130,7 +130,7 @@
                       <div class="result-actions">
                         <button class="quick-add-btn" data-product-id="{{ item.id }}">
                           <span class="btn-text">Quick Add</span>
-                          <span class="btn-icon">+</span>
+                          {% render 'icon-symbol', icon_symbol: '+' %}
                         </button>
                         <a href="{{ item.url }}" class="btn btn-outline">View Details</a>
                       </div>
@@ -140,7 +140,7 @@
                     <div class="result-image">
                       <a href="{{ item.url }}">
                         {% if item.image %}
-                          <img src="{{ item.image | img_url: 'medium' }}" alt="{{ item.title }}" loading="lazy">
+                          <img src="{{ item.image | img_url: 'medium' }}" alt="{{ item.title }}" loading="lazy" width="200" height="150">
                         {% else %}
                           <div class="placeholder-image">No Image</div>
                         {% endif %}
@@ -224,7 +224,7 @@
           
         {% else %}
           <div class="no-results">
-            <div class="no-results-icon">No Results</div>
+            {% render 'icon-text', icon_text: 'No Results' %}
             <h2>No results found</h2>
             <p>We couldn't find any results for "{{ search.terms | escape }}". Try:</p>
             <ul class="search-suggestions">

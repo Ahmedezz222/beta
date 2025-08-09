@@ -21,17 +21,17 @@
       
       <div class="features-grid">
         <div class="feature-item">
-                      <div class="feature-icon">Bike</div>
+          {% render 'icon-text', icon_text: 'Bike' %}
           <h3>Quality Bikes</h3>
           <p>Premium selection of mountain, road, and city bikes from trusted brands. Expert fitting and customization available.</p>
         </div>
         <div class="feature-item">
-                      <div class="feature-icon">Service</div>
+          {% render 'icon-text', icon_text: 'Service' %}
           <h3>Expert Service</h3>
           <p>Professional maintenance and repair services by certified mechanics. Quick turnaround and warranty on all work.</p>
         </div>
         <div class="feature-item">
-          <div class="feature-icon">☕</div>
+          {% render 'icon-symbol', icon_symbol: '☕' %}
           <h3>Cafe & Community</h3>
           <p>Relax in our cozy cafe while we service your bike. Fresh coffee, healthy snacks, and a great place to meet fellow cyclists.</p>
         </div>
@@ -114,7 +114,7 @@
       {% for product in collections.frontpage.products limit:3 %}
         <article class="product-card">
           <a href="{{ product.url }}" aria-label="View details for {{ product.title }}">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" loading="lazy">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" loading="lazy" width="300" height="200">
             <h3>{{ product.title }}</h3>
             <div class="product-rating">
               <div class="star-rating small">

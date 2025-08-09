@@ -53,7 +53,7 @@
                       </div>
                       
                       <button type="button" class="remove-item-btn" data-item-key="{{ item.key }}" aria-label="Remove item">
-                        <span class="remove-icon">×</span>
+                        {% render 'icon-symbol', icon_symbol: '×' %}
                         <span class="remove-text">Remove</span>
                       </button>
                     </div>
@@ -100,7 +100,7 @@
             <div class="checkout-actions">
               <button type="submit" form="cart-form" name="checkout" class="btn btn-primary checkout-btn">
                 <span class="btn-text">Proceed to Checkout</span>
-                <span class="btn-icon">→</span>
+                {% render 'icon-symbol', icon_symbol: '→' %}
               </button>
               
               <div class="payment-methods">
@@ -110,7 +110,7 @@
             
             <div class="cart-benefits">
               <div class="benefit-item">
-                <span class="benefit-icon">🚚</span>
+                {% render 'icon-symbol', icon_symbol: '🚚' %}
                 <div class="benefit-text">
                   <strong>Free Shipping</strong>
                   <span>On orders over $50</span>
@@ -118,7 +118,7 @@
               </div>
               
               <div class="benefit-item">
-                <span class="benefit-icon">↩️</span>
+                {% render 'icon-symbol', icon_symbol: '↩️' %}
                 <div class="benefit-text">
                   <strong>30-Day Returns</strong>
                   <span>Easy returns & exchanges</span>
@@ -126,7 +126,7 @@
               </div>
               
               <div class="benefit-item">
-                <span class="benefit-icon">🛡️</span>
+                {% render 'icon-symbol', icon_symbol: '🛡️' %}
                 <div class="benefit-text">
                   <strong>Warranty</strong>
                   <span>1-year manufacturer warranty</span>

@@ -1,11 +1,11 @@
 <main class="product-detail container" role="main">
   <article class="product-content">
     <div class="product-images">
-      <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}" loading="lazy">
+      <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}" loading="lazy" width="500" height="400">
       {% if product.images.size > 1 %}
         <div class="product-gallery">
           {% for image in product.images limit:4 %}
-            <img src="{{ image | img_url: 'medium' }}" alt="{{ product.title }} - Image {{ forloop.index }}" loading="lazy">
+            <img src="{{ image | img_url: 'medium' }}" alt="{{ product.title }} - Image {{ forloop.index }}" loading="lazy" width="150" height="120">
           {% endfor %}
         </div>
       {% endif %}
@@ -46,7 +46,7 @@
         </div>
         <button type="submit" class="add-to-cart-btn">
           <span class="btn-text">Add to Cart</span>
-                          <span class="btn-icon">Add</span>
+          {% render 'icon-symbol', icon_symbol: '🛒' %}
         </button>
       </form>
       
