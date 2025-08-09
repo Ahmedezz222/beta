@@ -8,15 +8,15 @@
 
       <div class="error-actions">
         <div class="action-buttons">
-          <a href="/" class="btn btn-primary">Go Home</a>
-          <a href="/collections/all" class="btn btn-secondary">Browse Products</a>
+          <a href="{{ routes.root_url }}" class="btn btn-primary">Go Home</a>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn-secondary">Browse Products</a>
           <a href="/pages/contact" class="btn btn-outline">Contact Us</a>
         </div>
       </div>
 
       <div class="error-search">
         <h2>Search Our Site</h2>
-        <form action="/search" method="get" class="search-form">
+        <form action="{{ routes.search_url }}" method="get" class="search-form">
           <div class="search-input-group">
             <input type="search" name="q" placeholder="Search for bikes, parts, accessories..." class="search-input" aria-label="Search">
             <button type="submit" class="search-btn" aria-label="Search">
@@ -30,12 +30,12 @@
         <h3>Popular Pages</h3>
         <div class="links-grid">
           <div class="link-card">
-            <h4><a href="/">Home</a></h4>
+            <h4><a href="{{ routes.root_url }}">Home</a></h4>
             <p>Return to our homepage</p>
           </div>
           
           <div class="link-card">
-            <h4><a href="/collections/all">All Products</a></h4>
+            <h4><a href="{{ routes.all_products_collection_url }}">All Products</a></h4>
             <p>Browse our complete catalog</p>
           </div>
           
@@ -66,29 +66,29 @@
         <div class="featured-grid">
           <div class="featured-item">
             <div class="featured-image">
-              <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Mountain Bike" loading="lazy">
+              <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Mountain Bike" loading="lazy" width="300" height="200">
             </div>
             <h4>Mountain Bike</h4>
             <p class="featured-price">$599.00</p>
-            <a href="/collections/mountain-bikes" class="btn btn-small">View Collection</a>
+            <a href="{{ routes.collections_url }}/mountain-bikes" class="btn btn-small">View Collection</a>
           </div>
           
           <div class="featured-item">
             <div class="featured-image">
-              <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Road Bike" loading="lazy">
+              <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Road Bike" loading="lazy" width="300" height="200">
             </div>
             <h4>Road Bike</h4>
             <p class="featured-price">$799.00</p>
-            <a href="/collections/road-bikes" class="btn btn-small">View Collection</a>
+            <a href="{{ routes.collections_url }}/road-bikes" class="btn btn-small">View Collection</a>
           </div>
           
           <div class="featured-item">
             <div class="featured-image">
-              <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Accessories" loading="lazy">
+              <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Accessories" loading="lazy" width="300" height="200">
             </div>
             <h4>Accessories</h4>
             <p class="featured-price">From $29.00</p>
-            <a href="/collections/accessories" class="btn btn-small">View Collection</a>
+            <a href="{{ routes.collections_url }}/accessories" class="btn btn-small">View Collection</a>
           </div>
         </div>
       </div>

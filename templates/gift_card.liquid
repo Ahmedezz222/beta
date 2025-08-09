@@ -31,7 +31,7 @@
           <div class="card-design">
             <div class="card-front">
               <div class="card-logo">
-                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" width="80" height="40">
               </div>
               <div class="card-amount">$100</div>
               <div class="card-message">Happy Cycling!</div>
@@ -44,7 +44,7 @@
         <div class="form-container">
           <h3>Purchase Gift Card</h3>
           
-          <form action="/cart/add" method="post" class="gift-card-form">
+          <form action="{{ routes.cart_add_url }}" method="post" class="gift-card-form">
             <div class="form-group">
               <label for="gift-card-amount">Amount</label>
               <select name="id" id="gift-card-amount" required class="amount-select">
@@ -186,7 +186,7 @@
       <div class="gift-card-redeem">
         <h3>Redeem Your Gift Card</h3>
         <div class="redeem-form">
-          <form action="/cart" method="post" class="redeem-form">
+          <form action="{{ routes.cart_url }}" method="post" class="redeem-form">
             <div class="form-group">
               <label for="gift-card-code">Gift Card Code</label>
               <input type="text" id="gift-card-code" name="gift_card_code" placeholder="Enter your gift card code" class="code-input">

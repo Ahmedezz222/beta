@@ -37,7 +37,7 @@
                 {% if article.image %}
                   <div class="recent-post-image">
                     <a href="{{ article.url }}">
-                      <img src="{{ article.image | img_url: 'small' }}" alt="{{ article.title }}" loading="lazy">
+                      <img src="{{ article.image | image_url: 'small' }}" alt="{{ article.title }}" loading="lazy" width="150" height="100">
                     </a>
                   </div>
                 {% endif %}
@@ -63,105 +63,106 @@
       </aside>
 
       <div class="blog-main">
-        {% if blog.articles.size > 0 %}
-          <div class="articles-grid">
-            {% for article in blog.articles %}
-              <article class="article-card">
-                <div class="article-image">
-                  <a href="{{ article.url }}">
-                    {% if article.image %}
-                      <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}" loading="lazy">
-                    {% else %}
-                      <div class="placeholder-image">No Image</div>
+        {% paginate blog.articles by 12 %}
+          {% if blog.articles.size > 0 %}
+            <div class="articles-grid">
+              {% for article in blog.articles %}
+                <article class="article-card">
+                  <div class="article-image">
+                    <a href="{{ article.url }}">
+                      {% if article.image %}
+                        <img src="{{ article.image | image_url: 'medium' }}" alt="{{ article.title }}" loading="lazy" width="400" height="250">
+                      {% else %}
+                        <div class="placeholder-image">No Image</div>
+                      {% endif %}
+                    </a>
+                    {% if article.tags.size > 0 %}
+                      <div class="article-tags">
+                        {% for tag in article.tags limit:2 %}
+                          <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                      </div>
                     {% endif %}
-                  </a>
-                  {% if article.tags.size > 0 %}
-                    <div class="article-tags">
-                      {% for tag in article.tags limit:2 %}
-                        <span class="tag">{{ tag }}</span>
-                      {% endfor %}
+                  </div>
+                  
+                  <div class="article-content">
+                    <header class="article-header">
+                      <h2 class="article-title">
+                        <a href="{{ article.url }}">{{ article.title }}</a>
+                      </h2>
+                      
+                      <div class="article-meta">
+                        <span class="article-date">{{ article.published_at | date: '%B %d, %Y' }}</span>
+                        {% if article.author %}
+                          <span class="article-author">by {{ article.author }}</span>
+                        {% endif %}
+                        <span class="article-comments">
+                          {% if article.comments_count > 0 %}
+                            {{ article.comments_count }} comments
+                          {% else %}
+                            No comments yet
+                          {% endif %}
+                        </span>
+                      </div>
+                    </header>
+                    
+                    <div class="article-excerpt">
+                      {% if article.excerpt != blank %}
+                        {{ article.excerpt }}
+                      {% else %}
+                        {{ article.content | strip_html | truncate: 150 }}
+                      {% endif %}
                     </div>
-                  {% endif %}
+                    
+                    <div class="article-footer">
+                      <a href="{{ article.url }}" class="read-more-link">
+                        Read More
+                        <span class="arrow">→</span>
+                      </a>
+                      
+                      <div class="article-stats">
+                        <span class="reading-time">5 min read</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              {% endfor %}
+            </div>
+            
+            {% if paginate.pages > 1 %}
+              <div class="blog-pagination">
+                {% if paginate.previous %}
+                  <a href="{{ paginate.previous.url }}" class="pagination-link prev" aria-label="Previous page">
+                    <span>← Previous</span>
+                  </a>
+                {% endif %}
+                
+                <div class="pagination-numbers">
+                  {% for part in paginate.parts %}
+                    {% if part.is_link %}
+                      <a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>
+                    {% else %}
+                      <span class="pagination-current">{{ part.title }}</span>
+                    {% endif %}
+                  {% endfor %}
                 </div>
                 
-                <div class="article-content">
-                  <header class="article-header">
-                    <h2 class="article-title">
-                      <a href="{{ article.url }}">{{ article.title }}</a>
-                    </h2>
-                    
-                    <div class="article-meta">
-                      <span class="article-date">{{ article.published_at | date: '%B %d, %Y' }}</span>
-                      {% if article.author %}
-                        <span class="article-author">by {{ article.author }}</span>
-                      {% endif %}
-                      <span class="article-comments">
-                        {% if article.comments_count > 0 %}
-                          {{ article.comments_count }} comments
-                        {% else %}
-                          No comments yet
-                        {% endif %}
-                      </span>
-                    </div>
-                  </header>
-                  
-                  <div class="article-excerpt">
-                    {% if article.excerpt != blank %}
-                      {{ article.excerpt }}
-                    {% else %}
-                      {{ article.content | strip_html | truncate: 150 }}
-                    {% endif %}
-                  </div>
-                  
-                  <div class="article-footer">
-                    <a href="{{ article.url }}" class="read-more-link">
-                      Read More
-                      <span class="arrow">→</span>
-                    </a>
-                    
-                    <div class="article-stats">
-                      <span class="reading-time">5 min read</span>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            {% endfor %}
-          </div>
-          
-          {% if paginate.pages > 1 %}
-            <div class="blog-pagination">
-              {% if paginate.previous %}
-                <a href="{{ paginate.previous.url }}" class="pagination-link prev" aria-label="Previous page">
-                  <span>← Previous</span>
-                </a>
-              {% endif %}
-              
-              <div class="pagination-numbers">
-                {% for part in paginate.parts %}
-                  {% if part.is_link %}
-                    <a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>
-                  {% else %}
-                    <span class="pagination-current">{{ part.title }}</span>
-                  {% endif %}
-                {% endfor %}
+                {% if paginate.next %}
+                  <a href="{{ paginate.next.url }}" class="pagination-link next" aria-label="Next page">
+                    <span>Next →</span>
+                  </a>
+                {% endif %}
               </div>
-              
-              {% if paginate.next %}
-                <a href="{{ paginate.next.url }}" class="pagination-link next" aria-label="Next page">
-                  <span>Next →</span>
-                </a>
-              {% endif %}
+            {% endif %}
+          {% else %}
+            <div class="empty-blog">
+              <div class="empty-icon">No Posts</div>
+              <h2>No articles yet</h2>
+              <p>Check back soon for cycling tips, product reviews, and community stories.</p>
+              <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Browse Products</a>
             </div>
           {% endif %}
-          
-        {% else %}
-          <div class="empty-blog">
-            <div class="empty-icon">No Posts</div>
-            <h2>No articles yet</h2>
-            <p>Check back soon for cycling tips, product reviews, and community stories.</p>
-            <a href="/collections/all" class="btn btn-primary">Browse Products</a>
-          </div>
-        {% endif %}
+        {% endpaginate %}
       </div>
     </div>
 
@@ -170,7 +171,7 @@
       <div class="featured-articles">
         <div class="featured-article">
           <div class="featured-image">
-            <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Cycling Tips" loading="lazy">
+            <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Cycling Tips" loading="lazy" width="400" height="250">
           </div>
           <div class="featured-content">
             <h3>Essential Cycling Safety Tips</h3>
@@ -181,7 +182,7 @@
         
         <div class="featured-article">
           <div class="featured-image">
-            <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Bike Maintenance" loading="lazy">
+            <img src="{{ 'bike_yard_m.jpg' | asset_url }}" alt="Bike Maintenance" loading="lazy" width="400" height="250">
           </div>
           <div class="featured-content">
             <h3>Basic Bike Maintenance Guide</h3>
