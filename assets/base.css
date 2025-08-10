@@ -107,6 +107,25 @@ input, button, textarea, select {
   color: white;
 }
 
+/* Button variants */
+.btn-secondary {
+  background: #f3f4f6;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+}
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+}
+.btn-danger:hover {
+  background: #dc2626;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.75em 0;
