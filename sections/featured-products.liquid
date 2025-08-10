@@ -83,7 +83,13 @@
               </h3>
 
               <div class="product-card__price">
-                {% render 'price', product: product, show_compare_at_price: true %}
+                {%- assign selected_variant = product.selected_or_first_available_variant -%}
+                {%- if selected_variant.compare_at_price > selected_variant.price -%}
+                  <span class="current-price">{{ selected_variant.price | money }}</span>
+                  <span class="compare-price">{{ selected_variant.compare_at_price | money }}</span>
+                {%- else -%}
+                  <span class="current-price">{{ selected_variant.price | money }}</span>
+                {%- endif -%}
               </div>
 
               {% if product.variants.size > 1 %}
