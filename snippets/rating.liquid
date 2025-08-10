@@ -1,0 +1,26 @@
+{%- comment -%}
+  Minimal rating snippet
+  Inputs: rating (Metafield rating object with rating & scale_max), rating_decimal (0, 0.5, or 1)
+{%- endcomment -%}
+{%- assign value = rating.rating | default: 0 -%}
+{%- assign scale_max = rating.scale_max | default: 5 -%}
+{%- assign full_stars = value | floor -%}
+{%- assign has_half = false -%}
+{%- if rating_decimal == 0.5 -%}
+  {%- assign has_half = true -%}
+{%- endif -%}
+{%- assign empty_stars = scale_max | minus: full_stars | minus: (has_half | times: 1) -%}
+
+<span class="star-rating" aria-label="{{ value }} out of {{ scale_max }}">
+  {%- for i in (1..full_stars) -%}
+    <span class="star filled">★</span>
+  {%- endfor -%}
+  {%- if has_half -%}
+    <span class="star filled">☆</span>
+  {%- endif -%}
+  {%- for i in (1..empty_stars) -%}
+    <span class="star">★</span>
+  {%- endfor -%}
+</span>
+
+

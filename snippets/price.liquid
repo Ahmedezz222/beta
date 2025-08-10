@@ -1,0 +1,13 @@
+{%- comment -%}
+  Minimal price snippet used by featured products
+  Inputs: product (ProductDrop) or variant (VariantDrop)
+{%- endcomment -%}
+{%- assign target = variant | default: product.selected_or_first_available_variant -%}
+{%- if target.compare_at_price > target.price -%}
+  <span class="current-price">{{ target.price | money }}</span>
+  <span class="compare-price">{{ target.compare_at_price | money }}</span>
+{%- else -%}
+  <span class="current-price">{{ target.price | money }}</span>
+{%- endif -%}
+
+

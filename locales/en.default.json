@@ -1,0 +1,18 @@
+{
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "variants": "variants",
+      "reviews": "reviews"
+    }
+  },
+  "sections": {
+    "featured_collection": {
+      "view_all": "View all",
+      "empty": "No products found"
+    }
+  }
+}
+
+
