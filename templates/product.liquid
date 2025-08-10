@@ -64,7 +64,7 @@
         {{ product.description }}
       </div>
       
-      <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form" id="product-form">
+      <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="product-form" id="product-form">
         {% if product.has_only_default_variant %}
           <input type="hidden" name="id" value="{{ selected_variant.id }}">
         {% else %}

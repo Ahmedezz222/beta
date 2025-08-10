@@ -99,18 +99,32 @@
               {% endif %}
 
               {% if section.settings.show_rating and product.metafields.reviews.rating.value != blank %}
+                {%- assign rating_value = product.metafields.reviews.rating.value.rating -%}
+                {%- assign scale_max = product.metafields.reviews.rating.value.scale_max | default: 5 -%}
+                {%- assign full_stars = rating_value | floor -%}
+                {%- assign rating_decimal = rating_value | modulo: 1 -%}
+                {%- assign has_half = false -%}
+                {%- if rating_decimal >= 0.3 and rating_decimal <= 0.7 -%}
+                  {%- assign has_half = true -%}
+                {%- elsif rating_decimal > 0.7 -%}
+                  {%- assign full_stars = full_stars | plus: 1 -%}
+                {%- endif -%}
                 <div class="rating">
-                  {%- liquid
-                    assign rating_decimal = 0 
-                    assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1 
-                    if decimal >= 0.3 and decimal <= 0.7
-                      assign rating_decimal = 0.5
-                    elsif decimal > 0.7
-                      assign rating_decimal = 1
-                    endif 
-                  -%}
-                  <div class="rating-star">
-                    {% render 'rating', rating: product.metafields.reviews.rating.value, rating_decimal: rating_decimal %}
+                  {%- if has_half -%}
+                    {%- assign show_half_index = full_stars | plus: 1 -%}
+                  {%- else -%}
+                    {%- assign show_half_index = 0 -%}
+                  {%- endif -%}
+                  <div class="rating-star star-rating" aria-label="{{ rating_value }} out of {{ scale_max }}">
+                    {%- for i in (1..scale_max) -%}
+                      {%- if i <= full_stars -%}
+                        <span class="star filled">★</span>
+                      {%- elsif show_half_index != 0 and i == show_half_index -%}
+                        <span class="star filled">☆</span>
+                      {%- else -%}
+                        <span class="star">★</span>
+                      {%- endif -%}
+                    {%- endfor -%}
                   </div>
                   <p class="rating-text">
                     {{ product.metafields.reviews.rating_count }} {{ "products.product.reviews" | t }}
